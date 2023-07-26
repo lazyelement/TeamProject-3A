@@ -1,5 +1,5 @@
 import pyrebase
-from flask import Flask, request, jsonify, render_template, redirect
+from flask import Flask, request, jsonify, render_template, redirect, url_for
 
 app = Flask(__name__)
 # app.secret_key = "Uog_Team3A_HunterianProject"
