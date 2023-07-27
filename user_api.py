@@ -137,7 +137,7 @@ def get_random_item_from_firestore():
 
     return random_item
 
-print(get_random_item_from_firestore())
+
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5000, debug=True)
