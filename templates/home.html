@@ -36,8 +36,8 @@
             }
 
             function playClicked() {
-                alert('Image Clicked!');
-                // Add your custom JavaScript code here
+                var form = document.getElementById("playForm");
+                form.submit();
             }
         </script>
     </head>
@@ -59,6 +59,7 @@
         </div>
 
         <form id="collectionsForm" method="GET" action="/collections"></form>
+        <form id="playForm" method="GET" action="/"></form>
     </body>
 
 </html>

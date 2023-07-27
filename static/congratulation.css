@@ -1,0 +1,65 @@
+body {
+    background: #d7842c;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    flex-direction: column;
+}
+
+.name {
+    text-align: center;
+    font-size: 65px;
+    font-family: 'Alfa Slab One', cursive;
+    color: #000;
+    margin-top: 200px;
+}
+
+.whitebox {
+    width: 800px;
+    height: 1300px;
+    background-color: white;
+    border-radius: 15px;
+    box-shadow:  0 10px 10px rgba(0, 0, 0, 0.2);;
+}
+
+.image {
+    text-align: center;
+    font-family: 'Alfa Slab One', cursive;
+    color: #fff;
+    margin-top: 100px;
+    max-height: 40%;
+}
+
+.image-stars{
+    margin-left: 40px;
+}
+
+button {
+    margin: 50px;
+    padding: 50px 60px;
+    font-size: 50px;
+    font-family: 'Montserrat', sans-serif;
+    cursor: pointer;
+    background-color: #dcb21e;
+    color: #fff;
+    border: none;
+    border-radius: 0;
+    outline: none;
+    transition: background-color 0.3s ease;
+    border-radius: 60px;
+}
+.button-container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.button-container-2{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex-direction: row;
+}

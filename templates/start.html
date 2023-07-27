@@ -1,0 +1,43 @@
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        <title>Start</title>
+
+        <style>
+            button {
+                width: 250px;
+                padding: 10px;
+                border: none;
+                border-radius: 50px; /* Set a high value to create an oval shape */
+                background-color: #DCB21F;
+                color: white;
+                font-size: 25px;
+                cursor: pointer;
+                display: block;
+                margin: auto;
+            }
+        </style>
+
+        <script>
+            
+        </script>
+    </head>
+
+    <body style="background-color: #D6842C;">
+        <div>
+            <img src="{{ url_for('static', filename='start_howtoplay.JPG') }}" 
+                alt="How To Play" style="display: block; width: 100%;">
+        </div>
+        <div>
+            <img src="{{ url_for('static', filename='start_instructions.JPG') }}" 
+                alt="Instructions" style="display: block; width: 100%;">
+        </div>
+        <br />
+        <form method="GET" action="/spin" style="height: auto;">
+            <button type="submit">Let's Go</button>
+        </form>
+    </body>
+
+</html>

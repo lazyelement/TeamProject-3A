@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Congratulation</title>
+    <link rel="stylesheet" href="/static/congratulation.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Alfa+Slab+One&family=Montserrat&display=swap" rel="stylesheet">
+
+    <script>
+        function info() {
+            var artifactObj = JSON.parse('{{ artifact | tojson | safe }}');
+        }
+        function nextRound() {
+            var form = document.createElement('form');
+            form.action = '/spin';
+            form.method = 'GET';
+            document.body.appendChild(form);
+            form.submit();
+        }
+        function basket() {
+            var form = document.createElement('form');
+            form.action = '/basket';
+            form.method = 'GET';
+            document.body.appendChild(form);
+            form.submit();
+        }
+    </script>
+</head>
+
+<body>
+
+    <div class="whitebox">
+        <div class="name">
+            {{ artifact.name }}
+        </div>
+        <div class="image">
+            <img src="{{ url_for('static', filename=artifact.img) }}" alt="{{ artifact.name }}">
+        </div>
+        <div class="image-stars">
+            <img src="../static/4.5-stars-1.png" alt="Rarity" width="700px">
+        </div>
+
+        <div class="button-container">
+            <button class="button-info" onclick="info()">Information</button>
+        </div>
+
+    </div>
+
+    <div class="button-container-2">
+        <button class="button" onclick="nextRound()">Next Round</button>
+        <button class="button" onclick="basket()">Basket</button>
+    </div>
+
+
+    <!-- <script src="./app.js"></script> -->
+</body>
+
+</html>
