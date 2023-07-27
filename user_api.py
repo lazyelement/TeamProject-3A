@@ -1,6 +1,9 @@
+import firebase_admin
 import pyrebase
 from functools import wraps
+from firebase_admin import credentials, firestore
 from flask import Flask, request, jsonify, render_template, redirect, url_for, session
+import random
 
 app = Flask(__name__)
 app.secret_key = "Uog_Team3A_HunterianProject"
@@ -17,6 +20,11 @@ config = {
 
 firebase = pyrebase.initialize_app(config)
 auth = firebase.auth()
+db = firebase.database()
+
+cred = credentials.Certificate('./keys/williamcollection-a2bba-3986e38ef805.json')
+firebase_admin.initialize_app(cred)
+
 
 def login_required(f):
     @wraps(f)
@@ -24,7 +32,9 @@ def login_required(f):
         if 'userId' not in session:
             return redirect(url_for('index'))
         return f(*args, **kwargs)
+
     return decorated_function
+
 
 @app.route('/')
 def index():
@@ -34,11 +44,13 @@ def index():
 def home():
     return render_template('home.html')
 
+
 @app.route('/collections', methods=['GET'])
 def collections():
     if 'userId' not in session:
         return redirect(url_for('login'))
     return render_template('collections.html')
+
 
 @app.route('/register', methods=['GET', 'POST'])
 def register():
@@ -56,6 +68,7 @@ def register():
                 return "Email already exists"
 
     return render_template('register.html')
+
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
@@ -76,7 +89,8 @@ def login():
 
     return render_template('login.html')
 
-@app.route('/logout', methods=['POST' , 'GET'])
+
+@app.route('/logout', methods=['POST', 'GET'])
 def logout():
     session.clear()
     return redirect(url_for('index'))
@@ -84,7 +98,6 @@ def logout():
 @app.route('/question', methods=['GET', 'POST'])
 def question():
     return render_template('question.html')
-
 
 @app.route('/congrats', methods=['GET', 'POST'])
 def congrats():
@@ -100,6 +113,31 @@ def test():
     # This endpoint will only be accessible if the user is logged in
 
     return jsonify({'data': 'Secret data only for logged-in users'}), 200
+
+
+def get_random_item_from_firestore():
+    # Get a reference to the "collectionquestions" collection in Firestore
+    questions_collection = firestore.client().collection('collectionquestions')
+
+    # Get all documents from the "collectionquestions" collection
+    all_items = questions_collection.get()
+
+    # Get the total number of documents in the "collectionquestions" collection
+    total_items = len(all_items)
+
+    # Check if there are any items in the collection
+    if total_items == 0:
+        return None
+
+    # Get a random number between 0 and the total number of items
+    random_index = random.randint(0, total_items - 1)
+
+    # Get the random item from the collection using the random index
+    random_item = all_items[random_index].to_dict()
+
+    return random_item
+
+print(get_random_item_from_firestore())
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5000, debug=True)
