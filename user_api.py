@@ -38,20 +38,25 @@ def collections():
 
 @app.route('/register', methods=['GET', 'POST'])
 def register():
+    error_message = None
     if request.method == 'POST':
         email = request.form['email']
         password = request.form['password']
+        cfmpassword = request.form['cfmpassword']
 
         try:
-            # Create a new user account with email and password
-            user = auth.create_user_with_email_and_password(email, password)
-            return redirect(url_for('index'))
+            if(password == cfmpassword):
+                # Create a new user account with email and password
+                user = auth.create_user_with_email_and_password(email, password)
+                return redirect(url_for('index'))
+            else:
+                error_message = "Passwords don't match"
         except Exception as e:
-            return str(e)
+            error_message = str(e)
             if "EMAIL_EXISTS" in str(e):
-                return "Email already exists"
+                error_message = "Email already exists"
 
-    return render_template('register.html')
+    return render_template('register.html', error_message=error_message)
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
