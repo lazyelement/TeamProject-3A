@@ -1,0 +1,64 @@
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        <title>Home</title>
+
+        <style>
+            .centered-image {
+                display: block;
+                margin: auto;
+            }
+        </style>
+
+        <script>
+            function profileClicked() {
+                
+            }
+
+            function collectionClicked() {
+                // fetch('/collections')
+                //     .then(function (response) {
+                //         if(response.redirected){
+                //             window.location.href = response.url;
+                //         } else {
+                //             return response.text();
+                //         }
+                //     }).then((html) => {
+                //         document.body.innerHTML = html
+                //     })
+                //     .catch(function (error) {
+                //         console.log('Fetch error:', error);
+                //     });
+                var form = document.getElementById("collectionsForm");
+                form.submit();
+            }
+
+            function playClicked() {
+                alert('Image Clicked!');
+                // Add your custom JavaScript code here
+            }
+        </script>
+    </head>
+
+    <body style="background-color: #D6842C;">
+        <div style="text-align: right;">
+            <img src="{{ url_for('static', filename='home_profile.png') }}" 
+                alt="Profile" width="50" height="50" onclick="profileClicked()">
+        </div>
+        <br /><br /><br />
+        <div>
+            <img class="centered-image" src="{{ url_for('static', filename='home_collection.png') }}" 
+                alt="Collection" width="250" height="200" onclick="collectionClicked()">
+        </div>
+        <br /><br />
+        <div>
+            <img class="centered-image" src="{{ url_for('static', filename='home_play.png') }}" 
+                alt="Play" width="180" height="200" onclick="playClicked()">
+        </div>
+
+        <form id="collectionsForm" method="GET" action="/collections"></form>
+    </body>
+
+</html>
