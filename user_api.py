@@ -32,7 +32,7 @@ def login_required(f):
     @wraps(f)
     def decorated_function(*args, **kwargs):
         if 'userId' not in session:
-            return redirect(url_for('index'))
+            return redirect(url_for('login'))
         return f(*args, **kwargs)
 
     return decorated_function
@@ -48,10 +48,12 @@ def home():
 
 
 @app.route('/collections', methods=['GET'])
+@login_required
 def collections():
-    if 'userId' not in session:
-        return redirect(url_for('login'))
-    return render_template('loginCollection.html')
+    currentUser = session.get('userId')
+    userCollections = firestore.client().collection('usercollection').document(currentUser).get().to_dict()['collections']
+    print(userCollections)
+    return render_template('loginCollection.html', collection=userCollections)
 
 
 @app.route('/register', methods=['GET', 'POST'])
@@ -156,31 +158,14 @@ def question(questionNum):
     else:
         artifact = get_random_item_from_firestore()
 
-        if currentUser:
-            if userCollections:
-                while True:
-                    existsDb = checkExistsDb(userCollections, artifact)
-                    if existsDb:
-                        artifact = get_random_item_from_firestore()
-                    else:
-                        if currentBasket:
-                            basketList = json.loads(currentBasket)
-                            while True:
-                                existsBasket = checkExistsBasket(basketList, artifact)
-                                if existsBasket:
-                                    artifact = get_random_item_from_firestore()
-                                else:
-                                    break
-                        break
-        else:
-            if currentBasket:
-                basketList = json.loads(currentBasket)
-                while True:
-                    existsBasket = checkExistsBasket(basketList, artifact)
-                    if existsBasket:
-                        artifact = get_random_item_from_firestore()
-                    else:
-                        break
+        if currentBasket:
+            basketList = json.loads(currentBasket)
+            while True:
+                existsBasket = checkExists(basketList, artifact)
+                if existsBasket:
+                    artifact = get_random_item_from_firestore()
+                else:
+                    break
 
         artifactString = json.dumps(artifact)
         session['artifact'] = artifactString
@@ -207,29 +192,23 @@ def question(questionNum):
 
     return render_template('question.html', artifact=artifact)
 
-def checkExistsDb(userCollections, artifact):
-    exists = False
-    for item in userCollections:
-        if item == artifact["name"]:
-            exists = True
-            break
-
-    return exists
-
-def checkExistsBasket(basketData, artifact):
-    exists = False
+def checkExists(basketData, artifact):
+    existsBasket = False
     for item in basketData["artifacts"]:
         if item["name"] == artifact["name"]:
-            exists = True
+            existsBasket = True
             break
+    
+    existsDb = False
+    currentUser = session.get('userId')
+    if currentUser:
+        userCollections = firestore.client().collection('usercollection').document(currentUser).get().to_dict()['collections']
+        for item in userCollections:
+            if item == artifact["name"]:
+                existsDb = True
+                break
 
-    return exists
-
-@app.route('/hehe', methods=['GET', 'POST'])
-def hehe():
-    basket = session.get('basket')
-    print(basket)
-    return render_template('congratulation.html')
+    return existsBasket or existsDb
 
 @app.route('/congrats', methods=['GET', 'POST'])
 def congrats():
@@ -248,13 +227,6 @@ def spin():
 @app.route('/basket', methods=['GET', 'POST'])
 def basket():
     return render_template('basket.html')
-
-@app.route('/test', methods=['GET'])
-@login_required
-def test():
-    # This endpoint will only be accessible if the user is logged in
-
-    return jsonify({'data': 'Secret data only for logged-in users'}), 200
 
 
 def get_random_item_from_firestore():

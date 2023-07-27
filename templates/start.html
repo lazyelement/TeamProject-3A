@@ -18,6 +18,26 @@
                 display: block;
                 margin: auto;
             }
+            .floating-btn {
+                position: fixed;
+                bottom: 20px;
+                right: 20px;
+                width: 60px;
+                height: 60px;
+                border-radius: 50%;
+                background-color: #ff0000;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+                z-index: 999; /* Make sure the button stays on top of other content */
+            }
+            .floating-btn img {
+                width: 40px; 
+                height: 40px;
+                border-radius: 50%;
+                margin-bottom: 0;
+            }
         </style>
 
         <script>
@@ -38,6 +58,10 @@
         <form method="GET" action="/spin" style="height: auto;">
             <button type="submit">Let's Go</button>
         </form>
+
+        <a href="/home" class="floating-btn">
+            <img src="../static/homelogo.png" alt="Home">
+        </a>
     </body>
 
 </html>
