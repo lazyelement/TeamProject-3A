@@ -28,6 +28,10 @@ def login_required(f):
 
 @app.route('/')
 def index():
+    return render_template('start.html')
+
+@app.route('/home')
+def home():
     return render_template('home.html')
 
 @app.route('/collections', methods=['GET'])
@@ -77,6 +81,19 @@ def logout():
     session.clear()
     return redirect(url_for('index'))
 
+@app.route('/question', methods=['GET', 'POST'])
+def question():
+    return render_template('question.html')
+
+
+@app.route('/congrats', methods=['GET', 'POST'])
+def congrats():
+    return render_template('congratulation.html')
+
+@app.route('/spin', methods=['GET', 'POST'])
+def spin():
+    return render_template('spin.html')
+
 @app.route('/test', methods=['GET'])
 @login_required
 def test():
@@ -85,4 +102,4 @@ def test():
     return jsonify({'data': 'Secret data only for logged-in users'}), 200
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(host='0.0.0.0', port=5000, debug=True)

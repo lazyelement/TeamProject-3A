@@ -1,0 +1,52 @@
+body {
+    background: #d7842c
+}
+
+div {
+    text-align: center;
+}
+
+.questionNum {
+    text-align: center;
+    font-size: 65px;
+    font-family: 'Alfa Slab One', cursive;
+    color: #fff;
+    margin-top: 200px;
+}
+
+.question {
+    text-align: center;
+    font-size: 55px;
+    font-family: 'Alfa Slab One', cursive;
+    color: #fff;
+    margin-top: 100px;
+}
+
+.image {
+    text-align: center;
+    font-size: 55px;
+    font-family: 'Alfa Slab One', cursive;
+    color: #fff;
+    margin-top: 100px;
+}
+
+
+button {
+    margin: 50px;
+    padding: 10px 20px;
+    font-size: 50px;
+    font-family: 'Alfa Slab One', cursive;
+    cursor: pointer;
+    background-color: #fff;
+    color: #757575;
+    border: none;
+    border-radius: 0;
+    outline: none;
+    transition: background-color 0.3s ease;
+    border-radius: 20px;
+}
+.button-container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
