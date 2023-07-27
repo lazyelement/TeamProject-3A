@@ -34,6 +34,10 @@ def index():
 def loading():
     return render_template('home.html')
 
+@app.route('/spin')
+def spin():
+    return render_template('spinningpage.html')
+
 @app.route('/collections', methods=['GET'])
 def collections():
     if 'userId' not in session:
