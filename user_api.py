@@ -42,8 +42,12 @@ def login_required(f):
 def index():
     return render_template('loading.html')
 
-@app.route('/spin')
-def spin():
+@app.route('/spinning')
+def spinning():
+    return render_template('spinningpage.html')
+
+@app.route('/start')
+def start():
     return render_template('start.html')
 
 @app.route('/home')
@@ -225,7 +229,7 @@ def congrats():
 
 @app.route('/spin', methods=['GET', 'POST'])
 def spin():
-    return render_template('spin.html')
+    return render_template('spinningpage.html')
 
 @app.route('/basket', methods=['GET', 'POST'])
 def basket():
