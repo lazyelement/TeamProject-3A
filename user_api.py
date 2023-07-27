@@ -40,12 +40,15 @@ def login_required(f):
 
 @app.route('/')
 def index():
+    return render_template('loading.html')
+
+@app.route('/spin')
+def spin():
     return render_template('start.html')
 
 @app.route('/home')
 def home():
     return render_template('home.html')
-
 
 @app.route('/collections', methods=['GET'])
 @login_required

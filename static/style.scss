@@ -1,0 +1,25 @@
+html, body {
+    background-color: #D6842C;
+    display: flex;
+    align-items: center;
+    justify-content: center; /* Change this to center the content vertically */
+    height: 100vh;
+    margin: 0;
+    overflow: hidden; /* Prevent scrolling */
+}
+
+@keyframes scroll {
+    0% {
+      transform: translateX(0);
+    }
+    100% {
+      transform: translateX(calc(-250px * 17));
+    }
+}
+
+.slide-track {
+    margin-top: -600px; /* Adjust the margin-top as needed */
+    animation: scroll 3s linear infinite; /* Adjust the duration to make the animation spin faster */
+    display: flex;
+    overflow: hidden;
+}
