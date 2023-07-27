@@ -37,13 +37,13 @@ def get_user_collection(user_id):
             categorized_collections = categorize_collections(collection_data_list)
 
             # Loop through the categorized collections and print the data for each category
-            for category, collections in categorized_collections.items():
-                print(f"Category: {category}")
-                for collection_data in collections:
-                    print(f"Collection Name: {collection_data['name']}")
-                    print(f"Image URL: {collection_data['img']}")
+            #for category, collections in categorized_collections.items():
+                #print(f"Category: {category}")
+                #for collection_data in collections:
+                  #  print(f"Collection Name: {collection_data['name']}")
+                  #  print(f"Image URL: {collection_data['img']}")
                     # Add other fields from the collection_data as needed
-                    print("--------------")
+                  #  print("--------------")
 
             return categorized_collections
 
@@ -84,4 +84,11 @@ def categorize_collections(collection_data_list):
 
 
 initialize_firebase()
-print(get_user_collection('YG5yTsvG7ceGsXDz4TtkCX3MCvJ3'))
+# Call the get_user_collection function to get the user's collection
+categorized_collections = get_user_collection('YG5yTsvG7ceGsXDz4TtkCX3MCvJ3')
+for category, collections in categorized_collections.items():
+    print(f"Category: {category}")
+    for collection_data in collections:
+        print(f"Collection Name: {collection_data['name']}")
+        print(f"Image URL: {collection_data['img']}")
+        print("--------------")
