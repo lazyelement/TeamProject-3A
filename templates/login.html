@@ -1,8 +1,27 @@
 <html>
-    <h1>Login</h1>
-    <form method="POST" action="/login">
-        <input type="email" name="email" placeholder="Email" required>
-        <input type="password" name="password" placeholder="Password" required>
-        <button type="submit">Login</button>
-    </form>
+    <head>
+        <title>Login</title>
+        <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    </head>
+    <body>
+        <div class="image-container">
+            <img src="{{ url_for('static', filename='hunter.png') }}" alt="Hunter Image">
+        </div>
+        <img src="{{ url_for('static', filename='williams_collection_text.png') }}" alt="Logo" class="logo">
+        <form method="POST" action="/login">
+            <div class="input-container">
+                <label for="email">Email</label>
+                <input type="email" name="email" id="email"  required>
+            </div>
+            <div class="input-container">
+                <label for="password">Password</label>
+                <input type="password" name="password" id="password"  required>
+            </div>
+            <button type="submit">Login</button>
+            <div class="signup-text">
+                Don't have an account? <a href="/register">Sign Up</a>
+            </div>
+        </form>
+    </body>
 </html>
+

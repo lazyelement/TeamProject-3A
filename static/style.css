@@ -1,0 +1,111 @@
+body {
+    background-color: #D6842C;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center; /* Change this to center the content vertically */
+    height: 100vh;
+    margin: 0;
+}
+
+.logo {
+    width: 900px;
+    height: auto;
+    position: fixed;
+    margin-top: 100px;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%); /* Center the logo horizontally */
+}
+
+form {
+    background-color: #D6842C;
+    padding: 20px;
+    border-radius: 40px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0);
+    display: flex;
+    margin-top: -500px; /* Add margin to create space between the logo and form */
+    flex-direction: column;
+    align-items: center;
+    position: relative; /* Add positioning to the form container */
+}
+
+form input {
+    width: 800px; /* Set the width you want */
+    padding: 40px;
+    font-size: 30px;
+    margin: 0 auto; /* Center the input horizontally */
+    margin-bottom: 15px;
+    margin-top: 10px;
+    border: 0px solid #D6842C;
+    border-radius: 15px;
+}
+
+.input-container {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    width: 100%;
+}
+
+label {
+    font-weight: lighter;
+    color: white;
+    margin-top: 50px;
+    font-size: 50px;
+}
+
+input {
+    width: 800px;
+    padding: 30px;
+    margin: 0 auto;
+    margin-bottom: 15px;
+    margin-top: 30px;
+    border: 1px solid #ccc;
+    border-radius: 15px;
+}
+
+button {
+    width: 700px;
+    padding: 20px;
+    border: none;
+    border-radius: 50px; /* Set a high value to create an oval shape */
+    background-color: #DCB21F;
+    color: white;
+    font-size: 40px;
+    cursor: pointer;
+    position: absolute; /* Add positioning to the button */
+    bottom: -450px; /* Adjust this value to move the button lower down */
+    left: 50%; /* Center the button horizontally */
+    transform: translateX(-50%);
+}
+
+.image-container {
+    position: fixed;
+    bottom: 400px;
+    right: -100px;
+}
+
+.image-container img {
+    width: 700px; /* Set the width you want */
+    height: auto; /* Maintain the aspect ratio of the image */
+}
+
+.signup-text {
+    color: white;
+    font-size: 30px;
+    margin-top: 10px;
+    position: absolute;
+    bottom: -490px; /* Adjust this value to move the text below the button */
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.signup-text a {
+    color: white;
+    text-decoration: underline;
+}
+
+.signup-text a:hover {
+    color: #DCB21F; /* Change the color on hover if desired */
+}
