@@ -28,6 +28,10 @@ def login_required(f):
 
 @app.route('/')
 def index():
+    return render_template('loading.html')
+
+@app.route('/home')
+def loading():
     return render_template('home.html')
 
 @app.route('/collections', methods=['GET'])
