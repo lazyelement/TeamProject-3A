@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Question {{ artifact.questionNum }}</title>
+  <link rel="stylesheet" href="/static/question.css" />
+  <link rel="stylesheet" href="/static/floatingBtn.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Alfa+Slab+One&display=swap" rel="stylesheet">
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      // on ready
+    });
+
+    function userChoice(btn) {
+      var artifactObj = JSON.parse('{{ artifact | tojson | safe }}');
+      var correctAns = artifactObj.questions[artifactObj.questionNum-1].answer.correct;
+      if(correctAns === btn.value) {
+        var form = document.createElement('form');
+        
+        var newQuestionNum = Number(artifactObj.questionNum)+1;
+        form.action = '/question/' + newQuestionNum;
+        form.method = 'GET';
+
+        document.body.appendChild(form);
+        form.submit();
+      } else {
+        btn.style.backgroundColor = "red";
+      }
+    }
+  </script>
+</head>
+
+<body>
+    <div class = "questionNum">{{ artifact.questionNum }}/3</div>
+
+    <div class = "question">{{ artifact.questions[artifact.questionNum-1].question }}</div>
+
+    <div class = "image">
+        <img src="{{ url_for('static', filename=artifact.img) }}" alt="{{ artifact.name }}">
+    </div>
+
+    <div class="button-container">
+      {% for ans in artifact.questions[artifact.questionNum-1].answer.all %}
+        <button class = "button" value="{{ ans }}" onclick="userChoice(this)">{{ ans }}</button>
+      {% endfor %}
+    </div>
+
+    
+    <a href="/home" class="floating-btn">
+      <img src="../static/homelogo.png" alt="Home">
+    </a>
+  <!-- <script src="./app.js"></script> -->
+</body>
+
+</html>

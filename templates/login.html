@@ -2,6 +2,7 @@
     <head>
         <title>Login</title>
         <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+        <link rel="stylesheet" href="/static/floatingBtn.css" />
     </head>
     <body>
         <div class="image-container">
@@ -22,6 +23,10 @@
                 Don't have an account? <a href="/register">Sign Up</a>
             </div>
         </form>
+
+        <a href="/home" class="floating-btn">
+            <img src="../static/homelogo.png" alt="Home">
+        </a>
     </body>
 </html>
 
