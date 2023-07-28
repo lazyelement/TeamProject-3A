@@ -54,12 +54,17 @@ def start():
 def home():
     return render_template('home.html')
 
+@app.route('/profile')
+@login_required
+def profile():
+    currentUserEmail = session.get('userEmail')
+    return render_template('profile.html', email=currentUserEmail)
+
 @app.route('/collections', methods=['GET'])
 @login_required
 def collections():
     currentUser = session.get('userId')
     userCollections = firestore.client().collection('usercollection').document(currentUser).get().to_dict()['collections']
-    print(userCollections)
     return render_template('loginCollection.html', collection=userCollections)
 
 
@@ -75,7 +80,7 @@ def register():
             if(password == cfmpassword):
                 # Create a new user account with email and password
                 user = auth.create_user_with_email_and_password(email, password)
-                return redirect(url_for('index'))
+                return redirect(url_for('login'))
             else:
                 error_message = "Passwords don't match"
         except Exception as e:
@@ -110,7 +115,7 @@ def login():
                     if item['name'] not in ucData.get("collections", []):
                         uc.update({"collections": firestore.ArrayUnion([item['name']])})
 
-            return redirect(url_for('index'))
+            return redirect(url_for('start'))
         except Exception as e:
             if "INVALID_PASSWORD" in str(e):
                 return "Password is incorrect"
@@ -123,7 +128,7 @@ def login():
 @app.route('/logout', methods=['POST', 'GET'])
 def logout():
     session.clear()
-    return redirect(url_for('index'))
+    return redirect(url_for('login'))
 
 @app.route('/question/<questionNum>', methods=['GET', 'POST'])
 def question(questionNum):
@@ -226,10 +231,6 @@ def congrats():
 
     session.pop('pastArtifact')
     return render_template('congratulation.html', artifact=artifact)
-
-@app.route('/spin', methods=['GET', 'POST'])
-def spin():
-    return render_template('spinningpage.html')
 
 @app.route('/basket', methods=['GET', 'POST'])
 def basket():
