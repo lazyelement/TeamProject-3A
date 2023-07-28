@@ -14,7 +14,8 @@
 
         <script>
             function profileClicked() {
-                
+                var form = document.getElementById("profileForm");
+                form.submit();
             }
 
             function collectionClicked() {
@@ -58,8 +59,9 @@
                 alt="Play" width="180" height="200" onclick="playClicked()">
         </div>
 
+        <form id="profileForm" method="GET" action="/profile"></form>
         <form id="collectionsForm" method="GET" action="/collections"></form>
-        <form id="playForm" method="GET" action="/"></form>
+        <form id="playForm" method="GET" action="/start"></form>
     </body>
 
 </html>
