@@ -1,0 +1,4 @@
+p.u-shaped {
+    transform: skew(-20deg);
+    transform-origin: 50% 0;
+}

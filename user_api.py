@@ -259,6 +259,10 @@ def get_random_item_from_firestore():
 
     return random_item
 
+@app.route('/today-basket', methods=['GET'])
+def today_basket():
+    return render_template('today-basket.html')
+
 # print(get_random_item_from_firestore())
 
 if __name__ == '__main__':
