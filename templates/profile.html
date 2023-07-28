@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile</title>
+
+    <style>
+        body {
+            text-align: center;
+            margin: 20px;
+            font-family: Arial, sans-serif;
+        }
+
+        .profile-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-top: 50px;
+        }
+
+        .profile-picture {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 5px solid #fff;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+            margin-bottom: 20px;
+        }
+
+        .email {
+            font-size: 25px;
+            color: #ffffff;
+            margin-bottom: 20px;
+        }
+
+        .logout-btn {
+            padding: 10px 60px;
+            background-color: #f00; /* Customize the color as per your preference */
+            color: #fff; /* Customize the text color as per your preference */
+            border: none;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 20px;
+            transition: background-color 0.3s ease;
+            margin-top: 80px;
+        }
+        .floating-btn {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background-color: #ff0000;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+            z-index: 999; /* Make sure the button stays on top of other content */
+        }
+        .floating-btn img {
+            width: 40px; 
+            height: 40px;
+            border-radius: 50%;
+            margin-bottom: 0;
+        }
+    </style>
+</head>
+
+<body style="background-color: #D6842C;">
+    <div class="profile-container">
+        <img src="../static/profilePic.png" alt="Profile Picture" class="profile-picture">
+
+        <p class="email">{{ email }}</p>
+
+        <form method="GET" action="/logout">
+            <button class="logout-btn">Logout</button>
+        </form>
+    </div>
+
+    <a href="/home" class="floating-btn">
+        <img src="../static/homelogo.png" alt="Home">
+    </a>
+</body>
+
+</html>
