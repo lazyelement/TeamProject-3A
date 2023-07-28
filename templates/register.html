@@ -1,8 +1,36 @@
 <html>
-    <h1>Register</h1>
-    <form method="POST" action="/register">
-        <input type="email" name="email" placeholder="Email" required>
-        <input type="password" name="password" placeholder="Password" required>
-        <button type="submit">Register</button>
-    </form>
+    <head>
+        <title>Register</title>
+        <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    </head>
+    <body>
+        <div class="image-container">
+            <img src="{{ url_for('static', filename='hunter2.png') }}" alt="Hunter Image">
+        </div>
+        <img src="{{ url_for('static', filename='williams_collection_text.png') }}" alt="Logo" class="logo">
+        <form class="register-form" method="POST" action="/register">
+            <div class="input-container">
+                <label for="email">Email</label>
+                <input type="email" name="email" id="email"  required>
+            </div>
+            <div class="input-container">
+                <label for="password">Password</label>
+                <input type="password" name="password" id="password"  required>
+            </div>
+            <div class="input-container">
+                <label for="cfmpassword">Confirm Password</label>
+                <input type="password" name="cfmpassword" id="cfmpassword"  required>
+            </div>
+            {% if error_message %}
+            <div class="error-message">
+                {{ error_message }}
+            </div>
+            {% endif %}
+            <button class="register-form-button" type="submit">Sign Up</button>
+            <div class="login-text">
+                Have an account? <a href="/login">Login</a>
+            </div>
+        </form>
+       
+    </body>
 </html>

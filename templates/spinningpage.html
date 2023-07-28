@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <!-- Add the form for automatic submission -->
+    <form id="submitForm" method="GET" action="/question/1">
+        <!-- You can add any hidden fields or other form elements here -->
+    </form>
+
+    <script>
+        // After 2 seconds, automatically submit the form
+        setTimeout(function () {
+            document.getElementById('submitForm').submit();
+        }, 2000); // 2000 milliseconds (2 seconds) delay before submitting the form
+    </script>
+    <style>
+        body {
+            background-color: #D6842C;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center; /* Change this to center the content vertically */
+            height: 100vh;
+            margin: 0;
+            overflow: hidden; /* Prevent scrolling */
+        }
+
+        @keyframes scroll {
+            0% {
+                transform: translateX(0);
+            }
+            100% {
+                transform: translateX(calc(-250px * 17));
+            }
+        }
+
+        .slide-track {
+            margin-top: 00px; /* Adjust the margin-top as needed */
+            animation: scroll 3s linear infinite; /* Adjust the duration to make the animation spin faster */
+            display: flex;
+            overflow: hidden;
+        }
+
+        .allLetters {
+            display: flex;
+            flex-direction: row;
+            margin-left: 600px;
+            justify-content: center;
+            align-items: center;
+            margin-top: 500px;
+        }
+
+        .char {
+            font-size: 74px;
+            color: black;
+            display: inline-block;
+            transition: all 0.9s;
+            animation: animate 2.5s infinite;
+            margin-right: 30px;
+            margin-bottom: 10px;
+        }
+
+        @keyframes animate {
+            0% { transform: translateY(0); }
+            25% { transform: translateY(-20px) rotate(5deg); }
+            50% { transform: translateY(0) rotate(-5deg); }
+            75% { transform: translateY(20px) rotate(5deg); }
+            100% { transform: translateY(0); }
+        }
+
+        .bottom-right-image {
+            position: fixed;
+            bottom: 400px;
+            right: -100px;
+            width: 700px; /* Set the width you want */
+            height: auto; /* Maintain the aspect ratio of the image */
+        }
+    </style>
+</head>
+<body>
+    <div class="slider">
+        <div class="slide-track">
+            <div class="slide">
+                <img src="{{ url_for('static', filename='shark.png') }}" height="600" width="600" alt="" />
+            </div>
+            <div class="slide">
+                <img src="{{ url_for('static', filename='ladybug.png') }}" height="600" width="600" alt="" />
+            </div>
+            <div class="slide">
+                <img src="{{ url_for('static', filename='dino.png') }}" height="600" width="600" alt="" />
+            </div>
+            <div class="slide">
+                <img src="{{ url_for('static', filename='bug.png') }}" height="600" width="600" alt="" />
+            </div>
+            <div class="slide">
+                <img src="{{ url_for('static', filename='shark.png') }}" height="600" width="600" alt="" />
+            </div>
+            <div class="slide">
+                <img src="{{ url_for('static', filename='ladybug.png') }}" height="600" width="600" alt="" />
+            </div>
+            <div class="slide">
+                <img src="{{ url_for('static', filename='dino.png') }}" height="600" width="600" alt="" />
+            </div>
+            <div class="slide">
+                <img src="{{ url_for('static', filename='bug.png') }}" height="600" width="600" alt="" />
+            </div>
+            <div class="slide">
+                <img src="{{ url_for('static', filename='shark.png') }}" height="600" width="600" alt="" />
+            </div>
+            <div class="slide">
+                <img src="{{ url_for('static', filename='ladybug.png') }}" height="600" width="600" alt="" />
+            </div>
+            <div class="slide">
+                <img src="{{ url_for('static', filename='dino.png') }}" height="600" width="600" alt="" />
+            </div>
+            <div class="slide">
+                <img src="{{ url_for('static', filename='bug.png') }}" height="600" width="600" alt="" />
+            </div>
+            <div class="slide">
+                <img src="{{ url_for('static', filename='shark.png') }}" height="600" width="600" alt="" />
+            </div>
+            <div class="slide">
+                <img src="{{ url_for('static', filename='ladybug.png') }}" height="600" width="600" alt="" />
+            </div>
+            <div class="slide">
+                <img src="{{ url_for('static', filename='dino.png') }}" height="600" width="600" alt="" />
+            </div>
+            <div class="slide">
+                <img src="{{ url_for('static', filename='bug.png') }}" height="600" width="600" alt="" />
+            </div>
+            <div class="slide">
+                <img src="{{ url_for('static', filename='shark.png') }}" height="600" width="600" alt="" />
+            </div>
+            <div class="slide">
+                <img src="{{ url_for('static', filename='ladybug.png') }}" height="600" width="600" alt="" />
+            </div>
+            <div class="slide">
+                <img src="{{ url_for('static', filename='dino.png') }}" height="600" width="600" alt="" />
+            </div>
+            <div class="slide">
+                <img src="{{ url_for('static', filename='bug.png') }}" height="600" width="600" alt="" />
+            </div>
+            <div class="slide">
+                <img src="{{ url_for('static', filename='shark.png') }}" height="600" width="600" alt="" />
+            </div>
+            <div class="slide">
+                <img src="{{ url_for('static', filename='ladybug.png') }}" height="600" width="600" alt="" />
+            </div>
+            <div class="slide">
+                <img src="{{ url_for('static', filename='dino.png') }}" height="600" width="600" alt="" />
+            </div>
+            <div class="slide">
+                <img src="{{ url_for('static', filename='bug.png') }}" height="600" width="600" alt="" />
+            </div>
+            <div class="slide">
+                <img src="{{ url_for('static', filename='shark.png') }}" height="600" width="600" alt="" />
+            </div>
+            <div class="slide">
+                <img src="{{ url_for('static', filename='ladybug.png') }}" height="600" width="600" alt="" />
+            </div>
+            <div class="slide">
+                <img src="{{ url_for('static', filename='dino.png') }}" height="600" width="600" alt="" />
+            </div>
+            <div class="slide">
+                <img src="{{ url_for('static', filename='bug.png') }}" height="600" width="600" alt="" />
+            </div>
+            <div class="slide">
+                <img src="{{ url_for('static', filename='shark.png') }}" height="600" width="600" alt="" />
+            </div>
+            <div class="slide">
+                <img src="{{ url_for('static', filename='ladybug.png') }}" height="600" width="600" alt="" />
+            </div>
+            <div class="slide">
+                <img src="{{ url_for('static', filename='dino.png') }}" height="600" width="600" alt="" />
+            </div>
+            <div class="slide">
+                <img src="{{ url_for('static', filename='bug.png') }}" height="600" width="600" alt="" />
+            </div>
+            <div class="slide">
+                <img src="{{ url_for('static', filename='shark.png') }}" height="600" width="600" alt="" />
+            </div>
+            <div class="slide">
+                <img src="{{ url_for('static', filename='ladybug.png') }}" height="600" width="600" alt="" />
+            </div>
+            <div class="slide">
+                <img src="{{ url_for('static', filename='dino.png') }}" height="600" width="600" alt="" />
+            </div>
+            <div class="slide">
+                <img src="{{ url_for('static', filename='bug.png') }}" height="600" width="600" alt="" />
+            </div>
+            <div class="slide">
+                <img src="{{ url_for('static', filename='shark.png') }}" height="600" width="600" alt="" />
+            </div>
+            <div class="slide">
+                <img src="{{ url_for('static', filename='ladybug.png') }}" height="600" width="600" alt="" />
+            </div>
+            <div class="slide">
+                <img src="{{ url_for('static', filename='dino.png') }}" height="600" width="600" alt="" />
+            </div>
+            <div class="slide">
+                <img src="{{ url_for('static', filename='bug.png') }}" height="600" width="600" alt="" />
+            </div>
+            <div class="slide">
+                <img src="{{ url_for('static', filename='shark.png') }}" height="600" width="600" alt="" />
+            </div>
+            <div class="slide">
+                <img src="{{ url_for('static', filename='ladybug.png') }}" height="600" width="600" alt="" />
+            </div>
+            <div class="slide">
+                <img src="{{ url_for('static', filename='dino.png') }}" height="600" width="600" alt="" />
+            </div>
+            <div class="slide">
+                <img src="{{ url_for('static', filename='bug.png') }}" height="600" width="600" alt="" />
+            </div>
+            <div class="slide">
+                <img src="{{ url_for('static', filename='shark.png') }}" height="600" width="600" alt="" />
+            </div>
+            <div class="slide">
+                <img src="{{ url_for('static', filename='ladybug.png') }}" height="600" width="600" alt="" />
+            </div>
+            <div class="slide">
+                <img src="{{ url_for('static', filename='dino.png') }}" height="600" width="600" alt="" />
+            </div>
+            <div class="slide">
+                <img src="{{ url_for('static', filename='bug.png') }}" height="600" width="600" alt="" />
+            </div>
+        </div>
+    </div>
+
+    <div class="allLetters">
+        <div class="char"> S </div>
+        <div class="char"> p </div>
+        <div class="char"> i </div>
+        <div class="char"> n </div>
+        <div class="char"> n </div>
+        <div class="char"> i </div>
+        <div class="char"> n </div>
+        <div class="char"> g </div>
+        <div class="char"> . </div>
+        <div class="char"> . </div>
+        <div class="char"> . </div>
+    </div>
+</body>
+</html>

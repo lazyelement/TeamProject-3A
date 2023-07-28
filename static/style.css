@@ -6,6 +6,7 @@ body {
     justify-content: center; /* Change this to center the content vertically */
     height: 100vh;
     margin: 0;
+    overflow: hidden; /* Prevent scrolling */
 }
 
 .logo {
@@ -109,3 +110,71 @@ button {
 .signup-text a:hover {
     color: #DCB21F; /* Change the color on hover if desired */
 }
+
+
+.register-form-button {
+    width: 700px;
+    padding: 20px;
+    border: none;
+    border-radius: 50px; /* Set a high value to create an oval shape */
+    background-color: #DCB21F;
+    color: white;
+    font-size: 40px;
+    cursor: pointer;
+    position: absolute; /* Add positioning to the button */
+    bottom: -250px; /* Adjust this value to move the button lower down */
+    left: 50%; /* Center the button horizontally */
+    transform: translateX(-50%);
+}
+
+.register-form {
+    background-color: #d6842c00;
+    padding: 20px;
+    border-radius: 0px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: -400px;
+}
+
+.login-text {
+    color: white;
+    font-size: 30px;
+    margin-top: 10px;
+    position: absolute;
+    bottom: -290px; /* Adjust this value to move the text below the button */
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.login-text a {
+    color: white;
+    text-decoration: underline;
+}
+
+.error-message {
+    color: red;
+    font-size: 35px;
+    font-weight: bold;
+    position: absolute; /* Add absolute positioning */
+    top: 0; /* Position the error message at the top of its container */
+    left: 50%; /* Center the error message horizontally */
+    transform: translateX(-50%); /* Center the error message horizontally */
+    margin-top: 780px;
+}
+
+.slider {
+    width: 250px; /* Set the width you want for each slide */
+    overflow: hidden;
+    margin: 0 auto;
+  }
+  
+  .slide-track {
+    display: flex; /* Create a flex container for the slides */
+    transition: transform 0.5s ease-in-out; /* Add smooth transition effect */
+  }
+  
+  .slide {
+    flex-shrink: 0; /* Prevent slides from shrinking to fit */
+  }
