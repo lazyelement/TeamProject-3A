@@ -2,3 +2,52 @@ p.u-shaped {
     transform: skew(-20deg);
     transform-origin: 50% 0;
 }
+
+body {
+    background-color: #D6842C;
+
+}
+
+.star-rating {
+    font-size: 0;
+    display: inline-block;
+    position: relative;
+}
+
+.star {
+    display: inline-block;
+    width: 25px;
+    height: 25px;
+    background-image: url('star.png');
+    /* Replace 'star.png' with your star image */
+    background-size: cover;
+    cursor: pointer;
+}
+
+.star[data-value]:before {
+    content: '\2605';
+    /* Unicode character for a solid star */
+    position: absolute;
+    opacity: 0;
+}
+
+.star[data-value="0.5"]:before {
+    content: '\2605\00BD';
+    /* Unicode character for a half star */
+    left: 0;
+    opacity: 1;
+}
+
+.star[data-value="1"]:before {
+    left: 25px;
+    opacity: 1;
+}
+
+.star[data-value="1.5"]:before {
+    content: '\2605';
+    /* Unicode character for a solid star */
+    left: 25px;
+    opacity: 0.5;
+}
+
+/* Add styles for other half-star values similarly */

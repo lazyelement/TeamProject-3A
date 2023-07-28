@@ -261,9 +261,9 @@ def get_random_item_from_firestore():
 
 @app.route('/today-basket', methods=['GET'])
 def today_basket():
-    return render_template('today-basket.html')
+    return render_template('today-basket.html', rating=4.5)
 
 # print(get_random_item_from_firestore())
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=5000, debug=True)
+    app.run(host='0.0.0.0', port=3000, debug=True)
