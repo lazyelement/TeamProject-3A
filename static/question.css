@@ -59,3 +59,58 @@ button {
     font-size: 50px;
     margin-top: 20px;
   }
+
+
+#hintButton {
+    position: fixed;
+    bottom: 70px;
+    left: 45%;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    outline: none;
+    padding: 0;
+    display: inline-block;
+  }
+
+
+#hintButton img {
+    width: 120px;
+    height: 120px;
+  }
+
+.hint {
+    margin-top: 10px;
+    font-size: 14px;
+    color: #555;
+  }
+
+
+.hint-popup {
+  display: none; /* Hide the pop-up by default */
+  position: fixed;
+  bottom: 100px; /* Adjust the distance from the bottom as needed */
+  left: 50%; /* Center the pop-up horizontally */
+  transform: translateX(-50%); /* Center the pop-up horizontally */
+  background-color: #f9f9f9;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+  padding: 15px;
+  border-radius: 5px;
+    z-index: 9999;
+}
+
+.hint-content {
+  text-align: center;
+    font-family: 'Alfa Slab One', cursive;
+    color: black;
+    font-size: 50px;
+    margin-top: 20px;
+}
+
+.close-button {
+  position: absolute;
+  top: 5px;
+  right: 10px;
+  font-size: 50px;
+  cursor: pointer;
+}

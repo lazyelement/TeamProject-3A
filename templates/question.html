@@ -13,12 +13,11 @@
     // on ready
   });
 
+
   function userChoice(btn) {
     var artifactObj = JSON.parse('{{ artifact | tojson | safe }}');
     var correctAns = artifactObj.questions[artifactObj.questionNum - 1].answer.correct;
-
-    var feedbackDiv = document.getElementById('feedback'); // Get the feedback div element
-
+    var feedbackDiv = document.getElementById('feedback');
     if (correctAns === btn.value) {
       var form = document.createElement('form');
       var newQuestionNum = Number(artifactObj.questionNum) + 1;
@@ -32,6 +31,20 @@
       feedbackDiv.innerHTML = "Please try again :("; // Display the feedback message
     }
   }
+
+  function showHint() {
+    var popup = document.getElementById('hintPopup');
+    popup.style.display = 'block';
+    var artifactObj = JSON.parse('{{ artifact | tojson | safe }}');
+    var locationHint = artifactObj.hint;
+    var hintMessage = document.getElementById('hintMessage');
+    hintMessage.textContent = `Hint: The artifact is located in ${locationHint}.`;
+  }
+  function hideHintPopup() {
+    var popup = document.getElementById('hintPopup');
+    popup.style.display = 'none';
+  }
+
 </script>
 
 </head>
@@ -51,14 +64,21 @@
       {% endfor %}
     </div>
 
+    <div id="hintPopup" class="hint-popup">
+        <div class="hint-content">
+          <span onclick="hideHintPopup()" class="close-button">&times;</span>
+          <p id="hintMessage"></p>
+        </div>
+    </div>
     <div id="feedback" class="feedback"></div>
 
+    <div id="hintButton" onclick="showHint()">
+        <img src="../static/light_bulb_logo.png" alt="Hint">
+    </div>
 
-    <a href="/home" class="floating-btn">
-      <img src="../static/homelogo.png" alt="Home">
-    </a>
 
-  <!-- <script src="./app.js"></script> -->
+
+
 </body>
 
 </html>
