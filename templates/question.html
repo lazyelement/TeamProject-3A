@@ -8,28 +8,32 @@
   <link rel="stylesheet" href="/static/floatingBtn.css" />
   <link href="https://fonts.googleapis.com/css2?family=Alfa+Slab+One&display=swap" rel="stylesheet">
 
-  <script>
-    document.addEventListener('DOMContentLoaded', function() {
-      // on ready
-    });
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    // on ready
+  });
 
-    function userChoice(btn) {
-      var artifactObj = JSON.parse('{{ artifact | tojson | safe }}');
-      var correctAns = artifactObj.questions[artifactObj.questionNum-1].answer.correct;
-      if(correctAns === btn.value) {
-        var form = document.createElement('form');
-        
-        var newQuestionNum = Number(artifactObj.questionNum)+1;
-        form.action = '/question/' + newQuestionNum;
-        form.method = 'GET';
+  function userChoice(btn) {
+    var artifactObj = JSON.parse('{{ artifact | tojson | safe }}');
+    var correctAns = artifactObj.questions[artifactObj.questionNum - 1].answer.correct;
 
-        document.body.appendChild(form);
-        form.submit();
-      } else {
-        btn.style.backgroundColor = "red";
-      }
+    var feedbackDiv = document.getElementById('feedback'); // Get the feedback div element
+
+    if (correctAns === btn.value) {
+      var form = document.createElement('form');
+      var newQuestionNum = Number(artifactObj.questionNum) + 1;
+      form.action = '/question/' + newQuestionNum;
+      form.method = 'GET';
+
+      document.body.appendChild(form);
+      form.submit();
+    } else {
+      btn.style.backgroundColor = "red";
+      feedbackDiv.innerHTML = "Please try again :("; // Display the feedback message
     }
-  </script>
+  }
+</script>
+
 </head>
 
 <body>
@@ -47,10 +51,13 @@
       {% endfor %}
     </div>
 
-    
+    <div id="feedback" class="feedback"></div>
+
+
     <a href="/home" class="floating-btn">
       <img src="../static/homelogo.png" alt="Home">
     </a>
+
   <!-- <script src="./app.js"></script> -->
 </body>
 
