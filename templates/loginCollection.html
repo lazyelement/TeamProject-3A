@@ -9,6 +9,16 @@
     <link rel="stylesheet" href="/static/floatingBtn.css" />
     <link href="https://fonts.googleapis.com/css2?family=Alfa+Slab+One&family=Angkor&family=Montserrat&display=swap"
         rel="stylesheet">
+
+    <script>
+        function artifactInfo(name) {
+            var form = document.createElement('form');
+            form.action = '/artifactInfo/' + name;
+            form.method = 'GET';
+            document.body.appendChild(form);
+            form.submit();
+        }
+    </script>
 </head>
 
 <body>
@@ -22,7 +32,7 @@
         <div class="row">
             <div class="gray-box">
                 {% if "Lady Shepenhor" in collection %}
-                <img src="../static/mummyphoto.png" alt="">
+                <img onclick="artifactInfo('Lady Shepenhor')" src="../static/mummyphoto.png" alt="">
                 {% else %}
                 <img src="../static/questionmark.png" alt="">
                 {% endif %}
@@ -97,7 +107,7 @@
         <div class="row">
             <div class="gray-box">
                 {% if "Cleopatra Coin" in collection %}
-                <img src="../static/coinphoto.png" alt="">
+                <img onclick="artifactInfo('Cleopatra Coin')" src="../static/coinphoto.png" alt="">
                 {% else %}
                 <img src="../static/questionmark.png" alt="">
                 {% endif %}
@@ -172,7 +182,7 @@
         <div class="row">
             <div class="gray-box">
                 {% if "Bearsden Shark" in collection %}
-                <img src="../static/sharkphoto.png" alt="">
+                <img onclick="artifactInfo('Bearsden Shark')" src="../static/sharkphoto.png" alt="">
                 {% else %}
                 <img src="../static/questionmark.png" alt="">
                 {% endif %}

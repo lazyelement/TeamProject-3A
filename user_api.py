@@ -240,19 +240,19 @@ def congrats():
 
 @app.route('/artifactInfo/<name>', methods=['GET', 'POST'])
 def artifactInfo(name):
-    basket = session.get('basket')
-    currentArtifact = {}
-    if basket:
-        artifacts = json.loads(basket)
-        for artifact in artifacts["artifacts"]:
-            if name == artifact["name"]:
-                currentArtifact = artifact
+    artifact = get_artifact_by_name(name)
+
+    referringPage = request.headers.get('Referer')
+    if 'collections' in referringPage:
+        page = 'collections'
+    else:
+        page = 'congrats'
 
     currentUser = session.get('userId')
     if currentUser:
-        return render_template('artifactInfo.html', artifact=artifact, loggedIn=True)
+        return render_template('artifactInfo.html', artifact=artifact, loggedIn=True, page=page)
 
-    return render_template('artifactInfo.html', artifact=artifact, loggedIn=False)
+    return render_template('artifactInfo.html', artifact=artifact, loggedIn=False, page=page)
 
 @app.route('/addToSession', methods=['POST'])
 def addToSession():
@@ -293,6 +293,18 @@ def get_random_item_from_firestore():
     random_item = all_items[random_index].to_dict()
 
     return random_item
+
+def get_artifact_by_name(name):
+    questions_collection = firestore.client().collection('collectionquestions')
+    all_items = questions_collection.get()
+    
+    artifact = {}
+    for item in all_items:
+        data = item.to_dict()
+        if data['name'] == name:
+            artifact = data
+
+    return artifact
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=3000, debug=True)
