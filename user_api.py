@@ -61,8 +61,9 @@ def profile():
     return render_template('profile.html', email=currentUserEmail)
 
 @app.route('/collections', methods=['GET'])
-@login_required
 def collections():
+    if 'userId' not in session:
+        return redirect(url_for('basket'))
     currentUser = session.get('userId')
     userCollections = firestore.client().collection('usercollection').document(currentUser).get().to_dict()['collections']
     return render_template('loginCollection.html', collection=userCollections)
@@ -234,7 +235,13 @@ def congrats():
 
 @app.route('/basket', methods=['GET', 'POST'])
 def basket():
-    return render_template('basket.html')
+    currentBasket = session.get('basket')
+    if not currentBasket:
+        return redirect(url_for('/'))
+    
+    basketList = json.loads(currentBasket)
+
+    return render_template('basket.html', basket=basketList)
 
 
 def get_random_item_from_firestore():
@@ -258,12 +265,6 @@ def get_random_item_from_firestore():
     random_item = all_items[random_index].to_dict()
 
     return random_item
-
-@app.route('/today-basket', methods=['GET'])
-def today_basket():
-    return render_template('today-basket.html', rating=4.5)
-
-# print(get_random_item_from_firestore())
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=3000, debug=True)

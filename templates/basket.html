@@ -1,1 +1,110 @@
-TODO
+<html>
+
+<head>
+    <title>
+        Today Basket
+    </title>
+    <!-- <link rel="stylesheet" href="{{ url_for('static', filename='css/tailwind/output.css') }}"> -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/today-basket.css') }}">
+    <script src="https://kit.fontawesome.com/91b8ae4c68.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/gh/peterhry/CircleType@2.3.1/dist/circletype.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- This tailwind link is for development only -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <script>
+        function loginClicked() {
+            var form = document.createElement('form');
+            form.action = '/login';
+            form.method = 'GET';
+            document.body.appendChild(form);
+            form.submit();
+        }
+        
+        function nextRoundClicked() {
+            var form = document.createElement('form');
+            form.action = '/spinning';
+            form.method = 'GET';
+            document.body.appendChild(form);
+            form.submit();
+        }
+    </script>
+</head>
+
+<body>
+    <div class="flex justify-center items-center p-5">
+        <img src="{{ url_for('static', filename='today-basket-banner.png') }}" alt="1" class="w-full h-full">
+
+
+    </div>
+    <div class="block justify-center items-center w-screen" id="today-basket-holder">
+
+
+
+    </div>
+    <div class="flex justify-center items-center">
+        <div class="inline-block">
+            <button onclick="loginClicked()" class="text-white text-base font-extrabold"
+                style="border-radius: 100px; background-color: #DCB21F; padding: 20px; text-shadow: 3px 5px 2px #00000011;">Log
+                In To
+                Keep Your
+                Collectibles</button>
+            <div class="mt-6 flex justify-center items-center">
+
+                <button onclick="nextRoundClicked()" class="text-white text-base font-extrabold w-full"
+                    style="border-radius: 100px; background-color: #DCB21F; padding: 20px; text-shadow: 3px 5px 2px #00000011;">
+                    Next Round</button>
+            </div>
+        </div>
+    </div>
+
+</body>
+
+<script>
+    function generateStarRating(rating) {
+        const maxRating = 5;
+        const fullStar = '<i style="color: #c4a64a;" class="fa fa-star"></i>';
+        const halfStar = '<i style="color: #c4a64a;"  class="fa fa-star-half-o"></i>';
+        const emptyStar = '<i style="color: #c4a64a;"  class="fa fa-star-o"></i>';
+
+        const fullStars = Math.floor(rating);
+        const hasHalfStar = rating % 1 !== 0;
+
+        let starRatingHtml = fullStar.repeat(fullStars);
+
+        if (hasHalfStar) {
+            starRatingHtml += halfStar;
+        }
+
+        starRatingHtml += emptyStar.repeat(maxRating - fullStars - (hasHalfStar ? 1 : 0));
+        return starRatingHtml;
+    }
+
+    $(document).ready(function () {
+        var basketObj = JSON.parse('{{ basket | tojson | safe }}');
+
+        $.each(basketObj.artifacts, function (index, item) {
+            const starRatingHtml = generateStarRating(item.rarity);
+            const html = `
+                <div class="ml-10 mr-10 mt-5 mb-5 bg-white p-7 rounded-3xl flex">
+                    <div class="w-1/2">
+                        <img src="../static/${item.img}" alt="1">
+                    </div>
+                    <div class=" w-5/6 flex flex-col justify-between">
+                        <div class="flex justify-center items-top h-5/6">
+                            <p>${item.name}</p>
+                        </div>
+                        <div class="flex justify-end items-center h-1/6">
+                            ${starRatingHtml}
+                        </div>
+                    </div>
+                </div>
+            `;
+
+            $("#today-basket-holder").append(html)
+        });
+    });
+</script>
+
+</html>
