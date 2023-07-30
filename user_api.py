@@ -114,14 +114,16 @@ def login():
                 basketList = json.loads(currentBasket)
                 for item in basketList['artifacts']:
                     if item['name'] not in ucData.get("collections", []):
-                        uc.update({"collections": firestore.ArrayUnion([item['name']])})
+                        uc.set({"collections": firestore.ArrayUnion([item['name']])}, merge=True)
 
             return redirect(url_for('start'))
         except Exception as e:
             if "INVALID_PASSWORD" in str(e):
-                return "Password is incorrect"
+                return render_template('login.html', error="Password is incorrect")
             elif "EMAIL_NOT_FOUND" in str(e):
-                return "Email is invalid"
+                return render_template('login.html', error="Email is invalid")
+            else:
+                return render_template('login.html', error="An error has occured")
 
     return render_template('login.html')
 
@@ -226,12 +228,14 @@ def checkExists(basketData, artifact):
 @app.route('/congrats', methods=['GET', 'POST'])
 def congrats():
     pastArtifact = session.get('pastArtifact')
-    artifact = {}
-    if pastArtifact:
-        artifact = json.loads(pastArtifact)
-
+    artifact = json.loads(pastArtifact)
     session.pop('pastArtifact')
-    return render_template('congratulation.html', artifact=artifact)
+
+    currentUser = session.get('userId')
+    if currentUser:
+        return render_template('congratulation.html', artifact=artifact, loggedIn=True)
+
+    return render_template('congratulation.html', artifact=artifact, loggedIn=False)
 
 
 @app.route('/artifactInfo/<name>', methods=['GET', 'POST'])
@@ -244,7 +248,11 @@ def artifactInfo(name):
             if name == artifact["name"]:
                 currentArtifact = artifact
 
-    return render_template('artifactInfo.html', artifact=artifact)
+    currentUser = session.get('userId')
+    if currentUser:
+        return render_template('artifactInfo.html', artifact=artifact, loggedIn=True)
+
+    return render_template('artifactInfo.html', artifact=artifact, loggedIn=False)
 
 @app.route('/addToSession', methods=['POST'])
 def addToSession():

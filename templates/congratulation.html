@@ -26,7 +26,12 @@
         }
         function basket() {
             var form = document.createElement('form');
-            form.action = 'basket';
+            var loggedIn = '{{ loggedIn|lower }}';
+            if(loggedIn) {
+                form.action = '/collections';
+            } else {
+                form.action = '/basket';
+            }
             form.method = 'GET';
             document.body.appendChild(form);
             form.submit();
