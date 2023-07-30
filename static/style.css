@@ -73,6 +73,7 @@ input {
     border-radius: 15px;
 }
 
+
 button {
     width: 700px;
     padding: 20px;
@@ -85,12 +86,14 @@ button {
     cursor: pointer;
     position: absolute;
     /* Add positioning to the button */
-    bottom: -850px;
+    bottom: -600px;
     /* Adjust this value to move the button lower down */
     left: 50%;
     /* Center the button horizontally */
     transform: translateX(-50%);
 }
+
+
 
 .image-container {
     position: fixed;
@@ -110,10 +113,12 @@ button {
     font-size: 30px;
     margin-top: 10px;
     position: absolute;
-    bottom: -890px;
+    bottom: -750px;
     /* Adjust this value to move the text below the button */
     left: 50%;
     transform: translateX(-50%);
+    padding:0px;
+    white-space: nowrap;
 }
 
 .signup-text a {
@@ -139,7 +144,7 @@ button {
     cursor: pointer;
     position: absolute;
     /* Add positioning to the button */
-    bottom: -690px;
+    bottom: -400px;
     /* Adjust this value to move the button lower down */
     left: 50%;
     /* Center the button horizontally */
@@ -154,7 +159,7 @@ button {
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin-top: -400px;
+    margin-top: -170px;
 }
 
 .login-text {
@@ -162,7 +167,7 @@ button {
     font-size: 30px;
     margin-top: 10px;
     position: absolute;
-    bottom: -740px;
+    bottom: -500px;
     /* Adjust this value to move the text below the button */
     left: 50%;
     transform: translateX(-50%);
