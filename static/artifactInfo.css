@@ -69,19 +69,10 @@ p {
 }
 
 
-.button-container{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-}
-
 button {
     margin-top: 30px;
-    width: 300px;
     padding: 50px 60px;
-    font-size: 30px;
+    font-size: 50px;
     font-family: 'Montserrat', sans-serif;
     cursor: pointer;
     background-color: #dcb21e;
@@ -90,16 +81,21 @@ button {
     border-radius: 0;
     outline: none;
     transition: background-color 0.3s ease;
-    border-radius: 80px;
+    border-radius: 60px;
 }
 
+.button-container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
 
 .button-container-2{
     display: flex;
     flex-direction: column;
     align-items: center;
     flex-direction: row;
-    gap: 150px;
+    gap: 150px
 }
 
 
