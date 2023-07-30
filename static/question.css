@@ -52,3 +52,10 @@ button {
     flex-direction: column;
     align-items: center;
 }
+
+.feedback {
+    font-family: 'Alfa Slab One', cursive;
+    color: red;
+    font-size: 50px;
+    margin-top: 20px;
+  }
