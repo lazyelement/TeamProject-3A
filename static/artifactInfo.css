@@ -1,0 +1,105 @@
+body {
+    background: #d7842c;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    flex-direction: column;
+}
+
+.whitebox {
+    width: 800px;
+    height: 1300px;
+    background-color: white;
+    border-radius: 15px;
+    box-shadow:  0 10px 10px rgba(0, 0, 0, 0.2);;
+    flex-direction: column;
+}
+
+.artefact-name{
+    font-size: 65px;
+    font-family: 'Alfa Slab One', cursive;
+    color: #000;
+    margin-top: 100px;
+    text-align: center;
+}
+
+.artefact-info{
+    display: flex;
+    flex-direction: row;
+}
+
+.artefact-img{
+    margin-top: 30px;
+}
+
+.artefact-words{
+    display: flex;
+    flex-direction: column;
+
+}
+
+.words{
+    font-size: 30px;
+    font-family: 'Alfa Slab One', cursive;
+    color: #000;
+    margin-top: 50px;
+    text-align: center;
+    text-align: left;
+}
+
+.grey-box{
+    width: 730px;
+    height: 400px;
+    background-color: #ccc;
+    margin-top: 100px;
+    margin-left: 30px;
+    border-radius: 25px;
+}
+
+p {
+    font-size: 30px;
+    font-family: 'Alfa Slab One', cursive;
+    color: #000;
+    margin-top: 100px;
+    text-align: justify;
+    padding: 10px;
+}
+
+
+.button-container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+button {
+    margin-top: 30px;
+    width: 300px;
+    padding: 50px 60px;
+    font-size: 30px;
+    font-family: 'Montserrat', sans-serif;
+    cursor: pointer;
+    background-color: #dcb21e;
+    color: #fff;
+    border: none;
+    border-radius: 0;
+    outline: none;
+    transition: background-color 0.3s ease;
+    border-radius: 80px;
+}
+
+
+.button-container-2{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex-direction: row;
+    gap: 150px;
+}
+
+

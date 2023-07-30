@@ -233,13 +233,33 @@ def congrats():
     session.pop('pastArtifact')
     return render_template('congratulation.html', artifact=artifact)
 
+
+@app.route('/artifactInfo/<name>', methods=['GET', 'POST'])
+def artifactInfo(name):
+    basket = session.get('basket')
+    currentArtifact = {}
+    if basket:
+        artifacts = json.loads(basket)
+        for artifact in artifacts["artifacts"]:
+            if name == artifact["name"]:
+                currentArtifact = artifact
+
+    return render_template('artifactInfo.html', artifact=artifact)
+
+@app.route('/addToSession', methods=['POST'])
+def addToSession():
+    data = request.json
+    pastArtifactString = json.dumps(data)
+    session['pastArtifact'] = pastArtifactString
+    return jsonify({'message': 'Success'}), 200
+
 @app.route('/basket', methods=['GET', 'POST'])
 def basket():
     currentBasket = session.get('basket')
-    if not currentBasket:
-        return redirect(url_for('/'))
+    basketList = 0
+    if currentBasket:
+        basketList = json.loads(currentBasket)
     
-    basketList = json.loads(currentBasket)
 
     return render_template('basket.html', basket=basketList)
 

@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Congratulation</title>
+    <link rel="stylesheet" href="/static/artifactInfo.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Alfa+Slab+One&family=Montserrat&display=swap" rel="stylesheet">
+
+
+    <script>
+        function back() {
+            var artifactObj = JSON.parse('{{ artifact | tojson | safe }}');
+            fetch('/addToSession', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(artifactObj)
+            })
+            .then(response => response.json())
+            .then(data => {
+                var form = document.createElement('form');
+                form.action = '/congrats';
+                form.method = 'GET';
+                document.body.appendChild(form);
+                form.submit();
+            })
+            .catch(error => {
+                console.error('Error adding object to Flask session:', error);
+            });
+        }
+        function nextRound() {
+            var form = document.createElement('form');
+            form.action = '../spinning';
+            form.method = 'GET';
+            document.body.appendChild(form);
+            form.submit();
+        }
+        function basket() {
+            var form = document.createElement('form');
+            form.action = '../basket';
+            form.method = 'GET';
+            document.body.appendChild(form);
+            form.submit();
+        }
+    </script>
+</head>
+
+<body>
+
+    <body>
+        <div class="whitebox">
+            <div class = "artefact-name">
+                {{ artifact.name }}
+            </div>
+
+            <div class = "artefact-info">
+                <div class = "artefact-img">
+                    <img src="{{ url_for('static', filename=artifact.img) }}" alt="">
+                </div>
+                <div class = "artefact-words">
+                    <div class = "words">Name: <br/> {{ artifact.name }}</div>
+
+                    <div class = "words">Age: <br/> {{ artifact.age }}</div>
+                    <div class = "words">Origin: <br/> {{ artifact.origin }}</div>
+                </div>
+            </div>
+
+            <div class = "grey-box">
+                <p>
+                    {{ artifact.desc }}
+                </p>
+            </div>
+
+            <div class="button-container">
+                <button class="button-back" onclick="back()">Back</button>
+            </div>
+
+        </div>
+
+        <div class="button-container-2">
+            <button class="button-nextrd" onclick="nextRound()">Next Round</button>
+            <button class="button-basket" onclick="basket()">Basket</button>
+        </div>
+    </body>
+    
+
+</body>
+
+</html>

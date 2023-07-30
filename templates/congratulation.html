@@ -11,6 +11,11 @@
     <script>
         function info() {
             var artifactObj = JSON.parse('{{ artifact | tojson | safe }}');
+            var form = document.createElement('form');
+            form.action = '/artifactInfo/' + artifactObj.name;
+            form.method = 'GET';
+            document.body.appendChild(form);
+            form.submit();
         }
         function nextRound() {
             var form = document.createElement('form');
