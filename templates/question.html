@@ -20,15 +20,22 @@
     var correctAns = artifactObj.questions[artifactObj.questionNum - 1].answer.correct;
     var feedbackDiv = document.getElementById('feedback');
     if (correctAns === btn.value) {
-      var form = document.createElement('form');
-      var newQuestionNum = Number(artifactObj.questionNum) + 1;
-      form.action = '/question/' + newQuestionNum;
-      form.method = 'GET';
+      btn.style.backgroundColor = "#0AF913";
+      feedbackDiv.style.color = "#0AF913";
+      feedbackDiv.innerHTML = "You got it! :)"; // Display the feedback message
+      
+      setTimeout(function() {
+        var form = document.createElement('form');
+        var newQuestionNum = Number(artifactObj.questionNum) + 1;
+        form.action = '/question/' + newQuestionNum;
+        form.method = 'GET';
 
-      document.body.appendChild(form);
-      form.submit();
+        document.body.appendChild(form);
+        form.submit();
+      }, 2000);
     } else {
       btn.style.backgroundColor = "red";
+      feedbackDiv.style.color = "red";
       feedbackDiv.innerHTML = "Please try again :("; // Display the feedback message
     }
   }
