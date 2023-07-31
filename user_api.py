@@ -360,9 +360,9 @@ def webhook():
             return json.dumps({'msg': 'Not main; ignoring'}), 458
 
         repo = git.Repo(os.getcwd(), search_parent_directories=True)
+        origin = repo.remotes.origin
         url_with_pat = 'https://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@github.com/junwei99555/TeamProject-3A.git'
-        origin = repo.create_remote('origin', url=url_with_pat)
-        # origin = repo.remotes.origin
+        origin.set_url(url_with_pat)
 
         pull_info = origin.pull()
 
