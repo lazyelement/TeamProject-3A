@@ -5,7 +5,8 @@ from functools import wraps
 from firebase_admin import credentials, firestore
 from flask import Flask, request, jsonify, render_template, redirect, url_for, session
 import random
-import subprocess
+import os
+import git
 import hmac
 import hashlib
 
@@ -355,18 +356,17 @@ def webhook():
         if payload['ref'] != 'refs/heads/main':
             return json.dumps({'msg': 'Not main; ignoring'}), 458
 
-        # repo = git.Repo("/home/junwei9955/williamcollection/TeamProject-3A")
+        repo = git.Repo(os.getcwd(), search_parent_directories=True)
+        url_with_pat = 'https://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@github.com/junwei99555/TeamProject-3A.git'
+        origin = repo.create_remote('origin', url=url_with_pat)
         # origin = repo.remotes.origin
 
-        # pull_info = origin.pull()
+        pull_info = origin.pull()
 
-        subprocess.run(['git', 'pull'])
-        return "ok", 200
-
-        # if len(pull_info) == 0:
-        #     return json.dumps({'msg': "Didn't pull any information from remote!"}), 459
-        # if pull_info[0].flags > 128:
-        #     return json.dumps({'msg': "Didn't pull any information from remote!"}), 460
+        if len(pull_info) == 0:
+            return json.dumps({'msg': "Didn't pull any information from remote!"}), 459
+        if pull_info[0].flags > 128:
+            return json.dumps({'msg': "Didn't pull any information from remote!"}), 460
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=3000, debug=True)
