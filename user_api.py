@@ -5,9 +5,7 @@ from functools import wraps
 from firebase_admin import credentials, firestore
 from flask import Flask, request, jsonify, render_template, redirect, url_for, session
 import random
-import os
-import logging
-import git
+import subprocess
 import hmac
 import hashlib
 
@@ -331,28 +329,21 @@ def is_valid_signature(x_hub_signature, data, private_key):
 @app.route('/update_server', methods=['POST'])
 def webhook():
     if request.method != 'POST':
-        logger.info("ok")
         return 'OK', 200
     else:
         # Do initial validations on required headers
         if 'X-Github-Event' not in request.headers:
-            logger.error('X-Github-Event not found')
             return 'Error', 450
         if 'X-Github-Delivery' not in request.headers:
-            logger.error('X-Github-Delivery  not found')
             return 'Error', 451
         if 'X-Hub-Signature' not in request.headers:
-            logger.error('X-Hub-Signature  not found')
             return 'Error', 452
         if not request.is_json:
-            logger.error('not json')
             return 'Error', 453
         if 'User-Agent' not in request.headers:
-            logger.error('User-Agent not found')
             return 'Error', 454
         ua = request.headers.get('User-Agent')
         if not ua.startswith('GitHub-Hookshot/'):
-            logger.error('User-Agent not correct')
             return 'Error', 455
 
         event = request.headers.get('X-GitHub-Event')
@@ -361,26 +352,29 @@ def webhook():
 
         x_hub_signature = request.headers.get('X-Hub-Signature')
         if not is_valid_signature(x_hub_signature, request.data, "williamsocute"):
-            logger.error('Deploy signature failed: {sig}'.format(sig=x_hub_signature))
+            print('Deploy signature failed: {sig}'.format(sig=x_hub_signature))
             return 'Error', 456
 
         payload = request.get_json()
         if payload is None:
-            logger.error('Deploy payload is empty: {payload}'.format(payload=payload))
+            print('Deploy payload is empty: {payload}'.format(payload=payload))
             return 'Error', 457
 
-        if payload['ref'] != 'refs/heads/master':
-            return json.dumps({'msg': 'Not master; ignoring'}), 458
+        if payload['ref'] != 'refs/heads/main':
+            return json.dumps({'msg': 'Not main; ignoring'}), 458
 
-        repo = git.Repo(os.getcwd(), search_parent_directories=True)
-        origin = repo.remotes.origin
+        # repo = git.Repo("/home/junwei9955/williamcollection/TeamProject-3A")
+        # origin = repo.remotes.origin
 
-        pull_info = origin.pull()
+        # pull_info = origin.pull()
 
-        if len(pull_info) == 0:
-            return json.dumps({'msg': "Didn't pull any information from remote!"}), 459
-        if pull_info[0].flags > 128:
-            return json.dumps({'msg': "Didn't pull any information from remote!"}), 460
+        subprocess.run(['git', 'pull'])
+        return "ok", 200
+
+        # if len(pull_info) == 0:
+        #     return json.dumps({'msg': "Didn't pull any information from remote!"}), 459
+        # if pull_info[0].flags > 128:
+        #     return json.dumps({'msg': "Didn't pull any information from remote!"}), 460
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=3000, debug=True)
