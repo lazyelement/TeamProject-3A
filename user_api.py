@@ -6,11 +6,20 @@ from firebase_admin import credentials, firestore
 from flask import Flask, request, jsonify, render_template, redirect, url_for, session
 import random
 import os
+import logging
 import git
 import hmac
 import hashlib
 
 app = Flask(__name__)
+logger = logging.getLogger(__name__)
+
+logging.basicConfig(
+    level=logging.DEBUG,
+    filename='/logfile.log',
+    format='%(asctime)s - %(levelname)s - %(message)s',
+)
+
 app.secret_key = "Uog_Team3A_HunterianProject"
 
 config = {
@@ -322,27 +331,28 @@ def is_valid_signature(x_hub_signature, data, private_key):
 @app.route('/update_server', methods=['POST'])
 def webhook():
     if request.method != 'POST':
+        logger.info("ok")
         return 'OK', 200
     else:
         # Do initial validations on required headers
         if 'X-Github-Event' not in request.headers:
-            print('X-Github-Event not found')
+            logger.error('X-Github-Event not found')
             return 'Error', 450
         if 'X-Github-Delivery' not in request.headers:
-            print('X-Github-Delivery  not found')
+            logger.error('X-Github-Delivery  not found')
             return 'Error', 451
         if 'X-Hub-Signature' not in request.headers:
-            print('X-Hub-Signature  not found')
+            logger.error('X-Hub-Signature  not found')
             return 'Error', 452
         if not request.is_json:
-            print('not json')
+            logger.error('not json')
             return 'Error', 453
         if 'User-Agent' not in request.headers:
-            print('User-Agent not found')
+            logger.error('User-Agent not found')
             return 'Error', 454
         ua = request.headers.get('User-Agent')
         if not ua.startswith('GitHub-Hookshot/'):
-            print('User-Agent not correct')
+            logger.error('User-Agent not correct')
             return 'Error', 455
 
         event = request.headers.get('X-GitHub-Event')
@@ -351,12 +361,12 @@ def webhook():
 
         x_hub_signature = request.headers.get('X-Hub-Signature')
         if not is_valid_signature(x_hub_signature, request.data, "williamsocute"):
-            print('Deploy signature failed: {sig}'.format(sig=x_hub_signature))
+            logger.error('Deploy signature failed: {sig}'.format(sig=x_hub_signature))
             return 'Error', 456
 
         payload = request.get_json()
         if payload is None:
-            print('Deploy payload is empty: {payload}'.format(payload=payload))
+            logger.error('Deploy payload is empty: {payload}'.format(payload=payload))
             return 'Error', 457
 
         if payload['ref'] != 'refs/heads/master':
