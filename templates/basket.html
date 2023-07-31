@@ -134,7 +134,7 @@
             $.each(basketObj.artifacts, function (index, item) {
                 const starRatingHtml = generateStarRating(item.rarity);
                 const html = `
-                    <div class="ml-10 mr-10 mt-5 mb-5 bg-white p-7 rounded-3xl flex">
+                    <div class="ml-10 mr-10 mt-5 mb-5 bg-white p-7 rounded-3xl flex artifact-item">
                         <div class="w-1/2">
                             <img src="../static/${item.img}" alt="1">
                         </div>
@@ -151,8 +151,18 @@
 
                 $("#today-basket-holder").append(html)
             });
+
+            $(".artifact-item").click(function() {
+                var itemName = $(this).find("p").text();
+                var form = document.createElement('form');
+                form.action = '/artifactInfo/' + itemName;
+                form.method = 'GET';
+                document.body.appendChild(form);
+                form.submit();
+            });
         }
     });
+    
 </script>
 
 </html>

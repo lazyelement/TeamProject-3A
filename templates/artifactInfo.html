@@ -13,13 +13,7 @@
     <script>
         function back() {
             var page = "{{ page }}";
-            if(page == 'collections') {
-                var form = document.createElement('form');
-                form.action = '/collections';
-                form.method = 'GET';
-                document.body.appendChild(form);
-                form.submit();
-            } else {
+            if(page == 'congrats') {
                 var artifactObj = JSON.parse('{{ artifact | tojson | safe }}');
                 fetch('/addToSession', {
                     method: 'POST',
@@ -39,6 +33,18 @@
                 .catch(error => {
                     console.error('Error adding object to Flask session:', error);
                 });
+            } else if(page == 'basket') {
+                var form = document.createElement('form');
+                form.action = '/basket';
+                form.method = 'GET';
+                document.body.appendChild(form);
+                form.submit();
+            } else {
+                var form = document.createElement('form');
+                form.action = '/collections';
+                form.method = 'GET';
+                document.body.appendChild(form);
+                form.submit();
             }
             
         }

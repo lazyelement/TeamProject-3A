@@ -243,10 +243,12 @@ def artifactInfo(name):
     artifact = get_artifact_by_name(name)
 
     referringPage = request.headers.get('Referer')
-    if 'collections' in referringPage:
-        page = 'collections'
-    else:
+    if 'congrats' in referringPage:
         page = 'congrats'
+    elif 'basket' in referringPage:
+        page = 'basket'
+    else:
+        page = 'collections'
 
     currentUser = session.get('userId')
     if currentUser:
