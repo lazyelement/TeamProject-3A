@@ -5,6 +5,7 @@ from functools import wraps
 from firebase_admin import credentials, firestore
 from flask import Flask, request, jsonify, render_template, redirect, url_for, session
 import random
+import os
 import git
 import hmac
 import hashlib
@@ -321,21 +322,27 @@ def is_valid_signature(x_hub_signature, data, private_key):
 @app.route('/update_server', methods=['POST'])
 def webhook():
     if request.method != 'POST':
-        return 'OK'
+        return 'OK', 200
     else:
         # Do initial validations on required headers
         if 'X-Github-Event' not in request.headers:
+            print('X-Github-Event not found')
             return 'Error'
         if 'X-Github-Delivery' not in request.headers:
+            print('X-Github-Delivery  not found')
             return 'Error'
         if 'X-Hub-Signature' not in request.headers:
+            print('X-Hub-Signature  not found')
             return 'Error'
         if not request.is_json:
+            print('not json')
             return 'Error'
         if 'User-Agent' not in request.headers:
+            print('User-Agent not found')
             return 'Error'
         ua = request.headers.get('User-Agent')
         if not ua.startswith('GitHub-Hookshot/'):
+            print('User-Agent not correct')
             return 'Error'
 
         event = request.headers.get('X-GitHub-Event')
@@ -343,7 +350,7 @@ def webhook():
             return json.dumps({'msg': 'Hi!'})
 
         x_hub_signature = request.headers.get('X-Hub-Signature')
-        if not is_valid_signature(x_hub_signature, request.data, w_secret):
+        if not is_valid_signature(x_hub_signature, request.data, "williamsocute"):
             print('Deploy signature failed: {sig}'.format(sig=x_hub_signature))
             return 'Error'
 
