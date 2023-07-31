@@ -7,11 +7,12 @@
     <meta name="viewport" content="user-scalable=no">
     <link rel="stylesheet" href="/static/congratulation.css" />
     <link rel="stylesheet" href="/static/floatingBtn.css" />
+    <script src="https://kit.fontawesome.com/91b8ae4c68.js" crossorigin="anonymous"></script>
     <link href="https://fonts.googleapis.com/css2?family=Alfa+Slab+One&family=Montserrat&display=swap" rel="stylesheet">
 
     <script>
+        var artifactObj = JSON.parse('{{ artifact | tojson | safe }}');
         function info() {
-            var artifactObj = JSON.parse('{{ artifact | tojson | safe }}');
             var form = document.createElement('form');
             form.action = '/artifactInfo/' + artifactObj.name;
             form.method = 'GET';
@@ -37,6 +38,32 @@
             document.body.appendChild(form);
             form.submit();
         }
+
+        function generateStarRating(rating) {
+            const maxRating = 5;
+            const fullStar = '<i style="color: #c4a64a;" class="fa fa-star"></i>';
+            const halfStar = '<i style="color: #c4a64a;"  class="fa fa-star-half-o"></i>';
+            const emptyStar = '<i style="color: #c4a64a;"  class="fa fa-star-o"></i>';
+
+            const fullStars = Math.floor(rating);
+            const hasHalfStar = rating % 1 !== 0;
+
+            let starRatingHtml = fullStar.repeat(fullStars);
+
+            if (hasHalfStar) {
+                starRatingHtml += halfStar;
+            }
+
+            starRatingHtml += emptyStar.repeat(maxRating - fullStars - (hasHalfStar ? 1 : 0));
+            return starRatingHtml;
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            var html = generateStarRating(artifactObj.rarity);
+            const rarityDiv = document.getElementById('rarity');
+            console.log(html);
+            rarityDiv.innerHTML = html;
+        });
     </script>
 </head>
 
@@ -49,8 +76,8 @@
         <div class="image">
             <img src="{{ url_for('static', filename=artifact.img) }}" alt="{{ artifact.name }}">
         </div>
-        <div class="image-stars">
-            <img src="../static/4.5-stars-1.png" alt="Rarity" width="700px">
+        <div id="rarity" class="image-stars">
+            <!-- <img src="../static/4.5-stars-1.png" alt="Rarity" width="700px"> -->
         </div>
 
         <div class="button-container">
