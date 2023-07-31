@@ -357,7 +357,7 @@ def webhook():
             return 'Error', 457
 
         if payload['ref'] != 'refs/heads/main':
-            return json.dumps({'msg': 'Not main; ignoring'}), 458
+            return json.dumps({'msg': 'Not main, ignoring'}), 458
 
         repo = git.Repo(os.getcwd(), search_parent_directories=True)
         origin = repo.remotes.origin
