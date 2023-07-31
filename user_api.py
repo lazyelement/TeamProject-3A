@@ -5,6 +5,9 @@ from functools import wraps
 from firebase_admin import credentials, firestore
 from flask import Flask, request, jsonify, render_template, redirect, url_for, session
 import random
+import git
+import hmac
+import hashlib
 
 app = Flask(__name__)
 app.secret_key = "Uog_Team3A_HunterianProject"
@@ -307,6 +310,60 @@ def get_artifact_by_name(name):
             artifact = data
 
     return artifact
+
+def is_valid_signature(x_hub_signature, data, private_key):
+    hash_algorithm, github_signature = x_hub_signature.split('=', 1)
+    algorithm = hashlib.__dict__.get(hash_algorithm)
+    encoded_key = bytes(private_key, 'latin-1')
+    mac = hmac.new(encoded_key, msg=data, digestmod=algorithm)
+    return hmac.compare_digest(mac.hexdigest(), github_signature)
+
+@app.route('/update_server', methods=['POST'])
+def webhook():
+    if request.method != 'POST':
+        return 'OK'
+    else:
+        # Do initial validations on required headers
+        if 'X-Github-Event' not in request.headers:
+            return 'Error'
+        if 'X-Github-Delivery' not in request.headers:
+            return 'Error'
+        if 'X-Hub-Signature' not in request.headers:
+            return 'Error'
+        if not request.is_json:
+            return 'Error'
+        if 'User-Agent' not in request.headers:
+            return 'Error'
+        ua = request.headers.get('User-Agent')
+        if not ua.startswith('GitHub-Hookshot/'):
+            return 'Error'
+
+        event = request.headers.get('X-GitHub-Event')
+        if event == "ping":
+            return json.dumps({'msg': 'Hi!'})
+
+        x_hub_signature = request.headers.get('X-Hub-Signature')
+        if not is_valid_signature(x_hub_signature, request.data, w_secret):
+            print('Deploy signature failed: {sig}'.format(sig=x_hub_signature))
+            return 'Error'
+
+        payload = request.get_json()
+        if payload is None:
+            print('Deploy payload is empty: {payload}'.format(payload=payload))
+            return 'Error'
+
+        if payload['ref'] != 'refs/heads/master':
+            return json.dumps({'msg': 'Not master; ignoring'})
+
+        repo = git.Repo(os.getcwd(), search_parent_directories=True)
+        origin = repo.remotes.origin
+
+        pull_info = origin.pull()
+
+        if len(pull_info) == 0:
+            return json.dumps({'msg': "Didn't pull any information from remote!"})
+        if pull_info[0].flags > 128:
+            return json.dumps({'msg': "Didn't pull any information from remote!"})
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=3000, debug=True)
