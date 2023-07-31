@@ -327,23 +327,23 @@ def webhook():
         # Do initial validations on required headers
         if 'X-Github-Event' not in request.headers:
             print('X-Github-Event not found')
-            return 'Error'
+            return 'Error', 450
         if 'X-Github-Delivery' not in request.headers:
             print('X-Github-Delivery  not found')
-            return 'Error'
+            return 'Error', 451
         if 'X-Hub-Signature' not in request.headers:
             print('X-Hub-Signature  not found')
-            return 'Error'
+            return 'Error', 452
         if not request.is_json:
             print('not json')
-            return 'Error'
+            return 'Error', 453
         if 'User-Agent' not in request.headers:
             print('User-Agent not found')
-            return 'Error'
+            return 'Error', 454
         ua = request.headers.get('User-Agent')
         if not ua.startswith('GitHub-Hookshot/'):
             print('User-Agent not correct')
-            return 'Error'
+            return 'Error', 455
 
         event = request.headers.get('X-GitHub-Event')
         if event == "ping":
@@ -352,15 +352,15 @@ def webhook():
         x_hub_signature = request.headers.get('X-Hub-Signature')
         if not is_valid_signature(x_hub_signature, request.data, "williamsocute"):
             print('Deploy signature failed: {sig}'.format(sig=x_hub_signature))
-            return 'Error'
+            return 'Error', 456
 
         payload = request.get_json()
         if payload is None:
             print('Deploy payload is empty: {payload}'.format(payload=payload))
-            return 'Error'
+            return 'Error', 457
 
         if payload['ref'] != 'refs/heads/master':
-            return json.dumps({'msg': 'Not master; ignoring'})
+            return json.dumps({'msg': 'Not master; ignoring'}), 458
 
         repo = git.Repo(os.getcwd(), search_parent_directories=True)
         origin = repo.remotes.origin
