@@ -13,6 +13,8 @@ import hashlib
 app = Flask(__name__)
 app.secret_key = "Uog_Team3A_HunterianProject"
 
+os.environ["w_secret"] = "williamsocute"
+
 config = {
     "apiKey": "AIzaSyD7zBBfqV8oDfZARSpHumUf3aVecRBsEP4",
     "authDomain": "williamcollection-a2bba.firebaseapp.com",
@@ -324,7 +326,7 @@ def webhook():
     if request.method != 'POST':
         return 'OK', 200
     else:
-        w_secret = "williamsocute"
+        w_secret = os.environ.get("w_secret")
         # Do initial validations on required headers
         if 'X-Github-Event' not in request.headers:
             return 'Error', 450
