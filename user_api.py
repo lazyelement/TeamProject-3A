@@ -370,6 +370,8 @@ def webhook():
             return json.dumps({'msg': "Didn't pull any information from remote!"}), 459
         if pull_info[0].flags > 128:
             return json.dumps({'msg': "Didn't pull any information from remote!"}), 460
+        
+        return 'ok', 200
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=3000, debug=True)
