@@ -11,7 +11,7 @@
         rel="stylesheet">
 
     <style>
-        #mysteryArtifactToast {
+        .toast {
             position: fixed;
             bottom: 40px;
             left: 50%;
@@ -32,7 +32,7 @@
     
         .show {
             display: block;
-            animation: fadeOut 3s ease-in-out;
+            animation: fadeOut 4s ease-in-out;
         }
     
         @keyframes fadeOut {
@@ -61,10 +61,22 @@
             setTimeout(function () {
                 toast.classList.remove('show');
                 toast.classList.add('hide');
-            }, 3000);
+            }, 4000);
         }
         
         document.addEventListener('DOMContentLoaded', function() {
+            var exceeded = '{{ param }}';
+            if (exceeded != 'None') {
+                const toast = document.getElementById('exceedToast');
+                toast.innerHTML = exceeded;
+                toast.classList.remove('hide');
+                toast.classList.add('show');
+                setTimeout(function () {
+                    toast.classList.remove('show');
+                    toast.classList.add('hide');
+                }, 4000);
+            }
+
             const images = document.querySelectorAll('img[src="../static/questionmark.png"]');
             images.forEach((image) => {
                 image.addEventListener('click', imageClickHandler);
@@ -309,7 +321,8 @@
         <img src="../static/homelogo.png" alt="Home">
     </a>
 
-    <div id="mysteryArtifactToast" class="hide">You have not unlocked this artifact</div>
+    <div id="mysteryArtifactToast" class="toast hide">You have not unlocked this artifact</div>
+    <div id="exceedToast" class="toast hide"></div>
     <!-- <script src="./app.js"></script> -->
 </body>
 

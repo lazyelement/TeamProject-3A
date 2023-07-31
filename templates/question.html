@@ -24,6 +24,11 @@
       feedbackDiv.style.color = "#0AF913";
       feedbackDiv.innerHTML = "You got it! :)"; // Display the feedback message
       
+      const elementsWithOnClick = document.querySelectorAll('[onclick]');
+      elementsWithOnClick.forEach((element) => {
+        element.removeAttribute('onclick');
+      });
+
       setTimeout(function() {
         var form = document.createElement('form');
         var newQuestionNum = Number(artifactObj.questionNum) + 1;

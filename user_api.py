@@ -68,11 +68,12 @@ def profile():
 
 @app.route('/collections', methods=['GET'])
 def collections():
+    param = request.args.get('param')
     if 'userId' not in session:
         return redirect(url_for('basket'))
     currentUser = session.get('userId')
     userCollections = firestore.client().collection('usercollection').document(currentUser).get().to_dict()['collections']
-    return render_template('loginCollection.html', collection=userCollections)
+    return render_template('loginCollection.html', collection=userCollections, param=param)
 
 
 @app.route('/register', methods=['GET', 'POST'])
@@ -153,10 +154,10 @@ def question(questionNum):
                 uc = firestore.client().collection('usercollection').document(currentUser)
                 uc.update({"collections": firestore.ArrayUnion([artifactP['name']])})
                         
-                
                 return redirect(url_for('congrats'))
         if len(userCollections) >= 3:
-            return redirect(url_for('collections'))
+            #xxxxxxxxxxxxxxxxxxxxxxxxx
+            return redirect(url_for('collections', param="You have exceeded the daily limit"))
     else:
         if int(questionNum) > 3:
             return redirect(url_for('congrats'))
@@ -165,14 +166,16 @@ def question(questionNum):
         basketList = json.loads(currentBasket)
         basketArr = [item["name"] for item in basketList["artifacts"]]
         if len(basketArr) >= 3:
-            return redirect(url_for('basket'))
+            #xxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+            return redirect(url_for('basket', param="You have exceeded the daily limit"))
 
     if currentUser and currentBasket:
         combinedArr = userCollections + basketArr
         uniqueSet = set(combinedArr)
         uniqueArr = list(uniqueSet)
         if len(uniqueArr) >= 3:
-            return redirect(url_for('collections'))
+            #xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+            return redirect(url_for('collections', param="You have exceeded the daily limit"))
 
     if currentArtifact:
         artifact = json.loads(currentArtifact)
@@ -234,6 +237,8 @@ def checkExists(basketData, artifact):
 @app.route('/congrats', methods=['GET', 'POST'])
 def congrats():
     pastArtifact = session.get('pastArtifact')
+    if not pastArtifact:
+        return redirect(url_for('collections'))
     artifact = json.loads(pastArtifact)
     session.pop('pastArtifact')
 
@@ -271,13 +276,14 @@ def addToSession():
 
 @app.route('/basket', methods=['GET', 'POST'])
 def basket():
+    param = request.args.get('param')
     currentBasket = session.get('basket')
     basketList = 0
     if currentBasket:
         basketList = json.loads(currentBasket)
     
 
-    return render_template('basket.html', basket=basketList)
+    return render_template('basket.html', basket=basketList, param=param)
 
 
 def get_random_item_from_firestore():
