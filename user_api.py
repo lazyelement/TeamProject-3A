@@ -324,6 +324,7 @@ def webhook():
     if request.method != 'POST':
         return 'OK', 200
     else:
+        w_secret = "williamsocute"
         # Do initial validations on required headers
         if 'X-Github-Event' not in request.headers:
             return 'Error', 450
@@ -344,7 +345,7 @@ def webhook():
             return json.dumps({'msg': 'Hi!'})
 
         x_hub_signature = request.headers.get('X-Hub-Signature')
-        if not is_valid_signature(x_hub_signature, request.data, "williamsocute"):
+        if not is_valid_signature(x_hub_signature, request.data, w_secret):
             print('Deploy signature failed: {sig}'.format(sig=x_hub_signature))
             return 'Error', 456
 
