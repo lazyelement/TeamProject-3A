@@ -10,6 +10,41 @@
     <link href="https://fonts.googleapis.com/css2?family=Alfa+Slab+One&family=Angkor&family=Montserrat&display=swap"
         rel="stylesheet">
 
+    <style>
+        #mysteryArtifactToast {
+            position: fixed;
+            bottom: 40px;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: #333;
+            color: #fff;
+            padding: 10px 20px;
+            border-radius: 8px;
+            font-size: 40px;
+            text-align: center;
+            font-family: 'Angkor', cursive;
+            min-width: 500px;
+        }
+
+        .hide {
+            display: none;
+        }
+    
+        .show {
+            display: block;
+            animation: fadeOut 3s ease-in-out;
+        }
+    
+        @keyframes fadeOut {
+            0% {
+                opacity: 1;
+            }
+    
+            100% {
+                opacity: 0;
+            }
+        }
+    </style>
     <script>
         function artifactInfo(name) {
             var form = document.createElement('form');
@@ -18,6 +53,23 @@
             document.body.appendChild(form);
             form.submit();
         }
+
+        function imageClickHandler(event) {
+            const toast = document.getElementById('mysteryArtifactToast');
+            toast.classList.remove('hide');
+            toast.classList.add('show');
+            setTimeout(function () {
+                toast.classList.remove('show');
+                toast.classList.add('hide');
+            }, 3000);
+        }
+        
+        document.addEventListener('DOMContentLoaded', function() {
+            const images = document.querySelectorAll('img[src="../static/questionmark.png"]');
+            images.forEach((image) => {
+                image.addEventListener('click', imageClickHandler);
+            });
+        });
     </script>
 </head>
 
@@ -257,6 +309,7 @@
         <img src="../static/homelogo.png" alt="Home">
     </a>
 
+    <div id="mysteryArtifactToast" class="hide">You have not unlocked this artifact</div>
     <!-- <script src="./app.js"></script> -->
 </body>
 

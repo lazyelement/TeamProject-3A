@@ -3,7 +3,7 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
+    /* justify-content: center; */
     /* Change this to center the content vertically */
     height: 100vh;
     margin: 0;
@@ -14,12 +14,8 @@ body {
 .logo {
     width: 900px;
     height: auto;
-    position: fixed;
     margin-top: 100px;
-    top: 0;
-    left: 50%;
-    transform: translateX(-50%);
-    /* Center the logo horizontally */
+    display: block;
 }
 
 form {
@@ -27,13 +23,9 @@ form {
     padding: 20px;
     border-radius: 40px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0);
-    display: flex;
-    margin-top: -500px;
-    /* Add margin to create space between the logo and form */
-    flex-direction: column;
-    align-items: center;
+    display: block;
     position: relative;
-    /* Add positioning to the form container */
+    margin-top: 100px;
 }
 
 form input {
@@ -54,6 +46,8 @@ form input {
     flex-direction: column;
     align-items: flex-start;
     width: 100%;
+    position: relative;
+    z-index: 998;
 }
 
 label {
@@ -79,18 +73,15 @@ button {
     padding: 20px;
     border: none;
     border-radius: 50px;
-    /* Set a high value to create an oval shape */
     background-color: #DCB21F;
     color: white;
     font-size: 40px;
     cursor: pointer;
-    position: absolute;
-    /* Add positioning to the button */
-    bottom: -600px;
-    /* Adjust this value to move the button lower down */
-    left: 50%;
-    /* Center the button horizontally */
-    transform: translateX(-50%);
+    margin: 0 auto;
+    display: block;
+    margin-top: 50px;
+    position: relative;
+    z-index: 998;
 }
 
 
@@ -99,6 +90,7 @@ button {
     position: fixed;
     bottom: 00px;
     right: -100px;
+    z-index: 500;
 }
 
 .image-container img {
@@ -111,14 +103,13 @@ button {
 .signup-text {
     color: white;
     font-size: 30px;
-    margin-top: 10px;
-    position: absolute;
-    bottom: -750px;
-    /* Adjust this value to move the text below the button */
-    left: 50%;
-    transform: translateX(-50%);
     padding:0px;
     white-space: nowrap;
+    text-align: center;
+    margin: 0 auto;
+    margin-top: 50px;
+    position: relative;
+    z-index: 998;
 }
 
 .signup-text a {
@@ -137,18 +128,15 @@ button {
     padding: 20px;
     border: none;
     border-radius: 50px;
-    /* Set a high value to create an oval shape */
     background-color: #DCB21F;
     color: white;
     font-size: 40px;
     cursor: pointer;
-    position: absolute;
-    /* Add positioning to the button */
-    bottom: -400px;
-    /* Adjust this value to move the button lower down */
-    left: 50%;
-    /* Center the button horizontally */
-    transform: translateX(-50%);
+    margin: 0 auto;
+    display: block;
+    margin-top: 50px;
+    position: relative;
+    z-index: 998;
 }
 
 .register-form {
@@ -156,21 +144,20 @@ button {
     padding: 20px;
     border-radius: 0px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin-top: -170px;
+    display: block;
+    position: relative;
+    margin-top: 100px;
 }
 
 .login-text {
     color: white;
     font-size: 30px;
-    margin-top: 10px;
-    position: absolute;
-    bottom: -500px;
-    /* Adjust this value to move the text below the button */
-    left: 50%;
-    transform: translateX(-50%);
+    white-space: nowrap;
+    text-align: center;
+    margin: 0 auto;
+    margin-top: 50px;
+    position: relative;
+    z-index: 998;
 }
 
 .login-text a {
