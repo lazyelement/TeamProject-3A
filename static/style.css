@@ -169,15 +169,7 @@ button {
     color: red;
     font-size: 35px;
     font-weight: bold;
-    position: absolute;
-    /* Add absolute positioning */
-    top: 0;
-    /* Position the error message at the top of its container */
-    left: 50%;
-    /* Center the error message horizontally */
-    transform: translateX(-50%);
-    /* Center the error message horizontally */
-    margin-top: 780px;
+    z-index: 999;
 }
 
 .slider {

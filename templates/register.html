@@ -23,16 +23,16 @@
                 <label for="cfmpassword">Confirm Password</label>
                 <input type="password" name="cfmpassword" id="cfmpassword"  required>
             </div>
-            {% if error_message %}
-            <div class="error-message">
-                {{ error_message }}
-            </div>
-            {% endif %}
             <button class="register-form-button" type="submit">Sign Up</button>
             <div class="login-text">
                 Have an account? <a href="/login">Login</a>
             </div>
         </form>
+        {% if error_message %}
+            <div class="error-message">
+                {{ error_message }}
+            </div>
+        {% endif %}
        
         <a href="/home" class="floating-btn">
             <img src="../static/homelogo.png" alt="Home">
