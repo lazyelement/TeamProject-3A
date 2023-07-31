@@ -10,14 +10,6 @@ import hmac
 import hashlib
 
 app = Flask(__name__)
-logger = logging.getLogger(__name__)
-
-logging.basicConfig(
-    level=logging.DEBUG,
-    filename='/logfile.log',
-    format='%(asctime)s - %(levelname)s - %(message)s',
-)
-
 app.secret_key = "Uog_Team3A_HunterianProject"
 
 config = {
