@@ -282,10 +282,7 @@ def basket():
     if currentBasket:
         basketList = json.loads(currentBasket)
 
-@app.route('/test', methods=['GET', 'POST'])
-def test():
-    return render_template('test.html')
-
+    return render_template('basket.html', basket=basketList, param=param)
 
 def get_random_item_from_firestore():
     # Get a reference to the "collectionquestions" collection in Firestore

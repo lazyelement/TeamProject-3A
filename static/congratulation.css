@@ -14,7 +14,23 @@ body {
     font-size: 65px;
     font-family: 'Alfa Slab One', cursive;
     color: #000;
-    margin-top: 200px;
+    margin-top: 20px;
+}
+
+.congrats {
+    text-Align: center;
+    font-Size: 50px;
+    font-Family: 'Alfa Slab One', cursive;
+    color: green;
+    margin-Top: 100px;
+}
+
+.received {
+    text-align: center;
+    font-size: 40px;
+    font-family: 'Alfa Slab One', cursive;
+    color: #000;
+    margin-top: 50px;
 }
 
 .whitebox {
@@ -64,4 +80,37 @@ button {
     flex-direction: column;
     align-items: center;
     flex-direction: row;
+}
+
+.confetti-container {
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    pointer-events: none;
+    overflow: hidden;
+    background-color: rgba(0, 0, 0, 0);
+    width: 100vw;
+    height: 100vh;
+}
+
+.confetti {
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    background-color: #f1c40f;
+    border-radius: 50%;
+    pointer-events: none;
+    animation: confettiAnimation 2s ease-in-out infinite;
+}
+
+@keyframes confettiAnimation {
+
+    0%{
+        transform: translateY(0) rotate(0);
+    }
+
+    100% {
+        transform: translateY(100vh) rotate(720deg);
+    }
 }

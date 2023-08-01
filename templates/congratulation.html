@@ -63,13 +63,52 @@
             const rarityDiv = document.getElementById('rarity');
             console.log(html);
             rarityDiv.innerHTML = html;
+
+            startConfetti();
         });
+
+        function startConfetti() {
+            const confettiContainer = document.getElementById('confettiContainer');
+            confettiContainer.innerHTML = ''; // Clear previous confetti (if any)
+
+            const confettiCount = 100; // Number of confetti pieces
+            const confettiDuration = 3000; // Duration of the confetti display in milliseconds (5 seconds)
+
+            for (let i = 0; i < confettiCount; i++) {
+                const confettiPiece = document.createElement('div');
+                confettiPiece.classList.add('confetti');
+                confettiPiece.style.backgroundColor = getRandomColor();
+                confettiPiece.style.left = `${Math.random() * 100}%`;
+                confettiPiece.style.animationDuration = `${Math.random() * 2 + 1}s`;
+                confettiContainer.appendChild(confettiPiece);
+            }
+
+            // Remove confetti after the specified duration
+            setTimeout(() => {
+                confettiContainer.innerHTML = '';
+            }, confettiDuration);
+        }
+
+        function getRandomColor() {
+            const letters = '0123456789ABCDEF';
+            let color = '#';
+            for (let i = 0; i < 6; i++) {
+                color += letters[Math.floor(Math.random() * 16)];
+            }
+            return color;
+        }
     </script>
 </head>
 
 <body>
-
+    <div class="confetti-container" id="confettiContainer"></div>
     <div class="whitebox">
+        <div class="congrats">
+            Congratulations
+        </div>
+        <div class="received">
+            You received
+        </div>
         <div class="name">
             {{ artifact.name }}
         </div>
