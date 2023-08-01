@@ -47,7 +47,7 @@ form input {
     align-items: flex-start;
     width: 100%;
     position: relative;
-    z-index: 998;
+    z-index: 500;
 }
 
 label {
@@ -90,7 +90,7 @@ button {
     position: fixed;
     bottom: 00px;
     right: -100px;
-    z-index: 500;
+    z-index: 1;
 }
 
 .image-container img {

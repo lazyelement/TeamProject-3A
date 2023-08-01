@@ -51,7 +51,7 @@
     var artifactObj = JSON.parse('{{ artifact | tojson | safe }}');
     var locationHint = artifactObj.hint;
     var hintMessage = document.getElementById('hintMessage');
-    hintMessage.textContent = `Hint: The artifact is located at ${locationHint}.`;
+    hintMessage.textContent = `Hint: ${locationHint}`;
   }
   function hideHintPopup() {
     var popup = document.getElementById('hintPopup');

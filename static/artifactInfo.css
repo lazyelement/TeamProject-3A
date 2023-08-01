@@ -11,7 +11,7 @@ body {
 
 .whitebox {
     width: 800px;
-    height: 1400px;
+    height: 1350px;
     background-color: white;
     border-radius: 15px;
     box-shadow:  0 10px 10px rgba(0, 0, 0, 0.2);;
@@ -22,7 +22,7 @@ body {
     font-size: 65px;
     font-family: 'Alfa Slab One', cursive;
     color: #000;
-    margin-top: 100px;
+    margin-top: 50px;
     text-align: center;
 }
 
@@ -65,7 +65,7 @@ p {
     color: #000;
     margin-top: 100px;
     text-align: justify;
-    padding: 10px;
+    padding: 20px;
 }
 
 

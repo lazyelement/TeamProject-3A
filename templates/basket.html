@@ -92,7 +92,7 @@
 
 
     </div>
-    <div class="block justify-center items-center w-screen" id="today-basket-holder">
+    <div style="margin-bottom: 40px;" class="block justify-center items-center w-screen" id="today-basket-holder">
 
 
 
@@ -101,7 +101,6 @@
         <div class="inline-block">
             <button id="loginBtn" onclick="loginClicked()" class="text-white text-base font-extrabold"
                 style="width: 250px;
-                height: 70px;
                 padding: 10px;
                 border: none;
                 border-radius: 50px; /* Set a high value to create an oval shape */
@@ -119,7 +118,6 @@
 
                 <button id="nextRoundBtn" onclick="nextRoundClicked()" class="text-white text-base font-extrabold w-full"
                     style="width: 250px;
-                    height: 70px;
                     padding: 10px;
                     border: none;
                     border-radius: 50px; /* Set a high value to create an oval shape */
@@ -179,11 +177,11 @@
             const html = `
                 <div class="ml-10 mr-10 justify-center text-white flex">
                     <div class="flex justify-center items-top h-5/6">
-                        <img src="../static/sadface.png">
+                        <img style="max-width: 70%;" src="../static/sadface.png">
                     </div>
                 </div>
 
-                <div class="ml-10 mr-10 mt-5 mb-5 p-5 justify-center text-white flex">
+                <div class="ml-10 mr-10 mt-5 mb-5 justify-center text-white flex">
                     <div class="flex justify-center items-top h-5/6">
                         <span style="font-size:20px;">
                             Basket is empty.

@@ -281,9 +281,10 @@ def basket():
     basketList = 0
     if currentBasket:
         basketList = json.loads(currentBasket)
-    
 
-    return render_template('basket.html', basket=basketList, param=param)
+@app.route('/test', methods=['GET', 'POST'])
+def test():
+    return render_template('test.html')
 
 
 def get_random_item_from_firestore():
