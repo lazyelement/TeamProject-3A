@@ -61,8 +61,10 @@
         document.addEventListener('DOMContentLoaded', function() {
             var html = generateStarRating(artifactObj.rarity);
             const rarityDiv = document.getElementById('rarity');
-            console.log(html);
-            rarityDiv.innerHTML = html;
+            var raritySpan = `
+                <span style="font-family: 'Alfa Slab One', cursive; margin-top: -10px;">Rarity:&nbsp;</span>
+            `;
+            rarityDiv.innerHTML = raritySpan + html;
 
             startConfetti();
         });
@@ -115,9 +117,7 @@
         <div class="image">
             <img src="{{ url_for('static', filename=artifact.img) }}" alt="{{ artifact.name }}">
         </div>
-        <div id="rarity" class="image-stars">
-            <!-- <img src="../static/4.5-stars-1.png" alt="Rarity" width="700px"> -->
-        </div>
+        <div id="rarity" class="image-stars"></div>
 
         <div class="button-container">
             <button class="button-info" onclick="info()">Information</button>
