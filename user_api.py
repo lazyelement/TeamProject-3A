@@ -156,7 +156,6 @@ def question(questionNum):
                         
                 return redirect(url_for('congrats'))
         if len(userCollections) >= 3:
-            #xxxxxxxxxxxxxxxxxxxxxxxxx
             return redirect(url_for('collections', param="You have exceeded the daily limit"))
     else:
         if int(questionNum) > 3:
@@ -166,7 +165,6 @@ def question(questionNum):
         basketList = json.loads(currentBasket)
         basketArr = [item["name"] for item in basketList["artifacts"]]
         if len(basketArr) >= 3:
-            #xxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
             return redirect(url_for('basket', param="You have exceeded the daily limit"))
 
     if currentUser and currentBasket:
@@ -174,7 +172,6 @@ def question(questionNum):
         uniqueSet = set(combinedArr)
         uniqueArr = list(uniqueSet)
         if len(uniqueArr) >= 3:
-            #xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
             return redirect(url_for('collections', param="You have exceeded the daily limit"))
 
     if currentArtifact:
