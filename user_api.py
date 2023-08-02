@@ -95,6 +95,12 @@ def register():
             error_message = str(e)
             if "EMAIL_EXISTS" in str(e):
                 error_message = "Email already exists"
+            elif "INVALID_EMAIL" in str(e):
+                error_message = "Email is invalid"
+            elif "WEAK_PASSWORD" in str(e):
+                error_message = "Password should be at least 6 characters"
+            else:
+                error_message = "An error has occured, please try again"
 
     return render_template('register.html', error_message=error_message)
 
